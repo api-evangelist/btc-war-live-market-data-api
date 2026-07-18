@@ -1,0 +1,70 @@
+name: BTC War Live Market Data API
+description: >-
+  Public, read-only real-time crypto market-data API from btcwar.net, exposing live Binance Spot order-flow snapshots
+  and single-market observations for nine USDT pairs as JSON and Schema.org JSON-LD. Ships a complete agent-native
+  discovery stack: OpenAPI 3.1, Arazzo workflow, hosted MCP server, and llms.txt.
+url: https://btc-war-live-market-data-api.apievangelist.com/apis.yml
+created: '2026-07-18'
+modified: '2026-07-18'
+specificationVersion: '0.21'
+tags:
+  - finance
+  - cryptocurrency
+  - market-data
+  - bitcoin
+  - crypto-price
+  - binance-spot
+  - order-flow
+  - market-depth
+  - json-ld
+  - schema.org
+  - openapi
+  - mcp
+  - read-only
+  - no-authentication
+apis:
+  - name: BTC War Live Market Data API
+    description: >-
+      Read-only REST/HTTP JSON and JSON-LD API for live Binance Spot market snapshots and single-market observations
+      across nine USDT pairs. Keyless, cached to at most 30 seconds, fail-closed on stale data. Includes OpenAPI 3.1
+      contract, Arazzo workflow, JSON Schemas, a hosted MCP server, and llms.txt.
+    humanURL: https://btcwar.net/btc-price
+    baseURL: https://btcwar.net
+    tags:
+      - finance
+      - cryptocurrency
+      - market-data
+      - bitcoin
+      - crypto-price
+      - binance-spot
+      - order-flow
+      - market-depth
+      - json-ld
+      - schema.org
+      - openapi
+      - mcp
+      - read-only
+      - no-authentication
+    properties:
+      - type: OpenAPI
+        url: https://btcwar.net/api/openapi.json
+      - type: Documentation
+        url: https://btcwar.net/btc-price
+      - type: Documentation
+        url: https://btcwar.net/how-it-works
+      - type: Documentation
+        url: https://btcwar.net/learn/order-flow-vs-order-book
+      - type: LLMSTxt
+        url: https://btcwar.net/llms.txt
+      - type: LLMSTxt
+        url: https://btcwar.net/llms-full.txt
+      - type: MCP
+        url: https://btcwar.net/mcp
+maintainers:
+  - FN: VibeWhip
+    url: https://github.com/VibeWhip/btc-war
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 95
+  at: '2026-07-18T22:59:27.295Z'
