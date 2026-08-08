@@ -58,7 +58,7 @@ apis:
         url: https://btcwar.net/llms.txt
       - type: LLMSTxt
         url: https://btcwar.net/llms-full.txt
-      - type: MCP
+      - type: MCPServer
         url: https://btcwar.net/mcp
 maintainers:
   - FN: VibeWhip
