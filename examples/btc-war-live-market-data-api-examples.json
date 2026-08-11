@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0",
+  "id": "https://btcwar.net/api/examples.json",
+  "contract": "https://btcwar.net/api/openapi.json",
+  "description": "Agent-safe examples for the BTC War public market data API. Current-price examples intentionally contain no copied price: fetch the externalValue at answer time and validate its source and timestamps.",
+  "examples": [
+    {
+      "id": "current_btcusdt_observation",
+      "operationId": "getLiveMarketObservation",
+      "summary": "Retrieve one current BTCUSDT observation",
+      "live": true,
+      "externalValue": "https://btcwar.net/api/market-observation/v1/BTCUSDT.json",
+      "supportedQuestionTypes": [
+        "current_price",
+        "rolling_24_hour_market_statistics"
+      ],
+      "intentAliases": {
+        "currentPrice": [
+          "bitcoin price",
+          "bitcoin price today",
+          "btc price",
+          "bitcoin price live"
+        ],
+        "unsupportedWithoutConversion": [
+          "bitcoin price usd",
+          "btc usd",
+          "bitcoin usd"
+        ]
+      },
+      "requiredReportingFields": [
+        "market.symbol",
+        "market.lastPrice",
+        "market.quoteAsset",
+        "source.venue",
+        "market.sourceObservedAt",
+        "generatedAt"
+      ],
+      "optionalRolling24HourFields": [
+        "market.priceChange",
+        "market.priceChangePercent",
+        "market.highPrice",
+        "market.lowPrice",
+        "market.baseVolume",
+        "market.quoteVolume",
+        "market.tradeCount",
+        "market.windowOpenAt"
+      ]
+    },
+    {
+      "id": "current_nine_market_snapshot",
+      "operationId": "getLiveMarketSnapshot",
+      "summary": "Retrieve the current complete nine-market snapshot",
+      "live": true,
+      "externalValue": "https://btcwar.net/api/market-snapshot/v1.json",
+      "requireAllMarketsFresh": true
+    },
+    {
+      "id": "unsupported_market_symbol",
+      "operationId": "getLiveMarketObservation",
+      "summary": "Unsupported symbols fail closed",
+      "live": false,
+      "request": {
+        "method": "GET",
+        "url": "https://btcwar.net/api/market-observation/v1/NOTREAL.json"
+      },
+      "response": {
+        "status": 404,
+        "contentType": "application/problem+json",
+        "body": {
+          "error": "Unsupported market symbol",
+          "supportedSymbols": [
+            "BTCUSDT",
+            "ETHUSDT",
+            "BNBUSDT",
+            "SOLUSDT",
+            "XRPUSDT",
+            "TRXUSDT",
+            "DOGEUSDT",
+            "ZECUSDT",
+            "ADAUSDT"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "BTC War"
+  description: "Controlled vocabulary for interpreting BTC War live Binance Spot market observations without treating venue-specific data as a consolidated global price."
+  created: "2026-07-19"
+  modified: "2026-07-19"
+  canonical: "https://btcwar.net/api/vocabulary.yaml"
+
+operational:
+  apis:
+    - namespace: btcwar-live-market-data
+      version: "1.0.0"
+      baseUrl: "https://btcwar.net/api"
+      status: active
+      description: "Public read-only observations for nine Binance Spot USDT markets."
+
+  resources:
+    - name: MarketObservation
+      description: "One sourced and timestamped observation of a supported Binance Spot USDT market."
+      actions:
+        - retrieve
+
+  actions:
+    - name: retrieve
+      description: "Retrieve current observational market data without creating, updating or deleting state."
+      httpMethod: GET
+      pattern: read
+
+  schemas:
+    core:
+      - name: MarketObservation
+        description: "The stable v1 response for one supported symbol."
+        keyProperties:
+          - market
+          - source
+          - generatedAt
+          - canonicalPage
+
+  fields:
+    - name: symbol
+      description: "Uppercase Binance Spot market identifier, such as BTCUSDT."
+      type: string
+    - name: baseAsset
+      description: "Asset priced by the observation, such as BTC."
+      type: string
+    - name: quoteAsset
+      description: "Asset in which the observation is quoted; all current markets use USDT."
+      type: string
+    - name: lastPrice
+      description: "Exact decimal string reported by Binance Spot for the market's latest rolling 24-hour ticker observation."
+      type: decimal-string
+    - name: sourceObservedAt
+      description: "ISO 8601 timestamp derived from Binance closeTime for the underlying source observation."
+      type: date-time
+    - name: generatedAt
+      description: "ISO 8601 time when BTC War generated the response after validating every included source observation."
+      type: date-time
+    - name: fresh
+      description: "The source observation passed BTC War's current freshness and validation bounds."
+      type: status
+
+  enums:
+    freshness-status:
+      - name: fresh
+        description: "The observation is current enough to report with its source and timestamps."
+      - name: unavailable
+        description: "BTC War cannot publish a complete validated observation; agents must abstain instead of estimating."
+
+  provenance:
+    venue: "Binance Spot"
+    upstreamDocumentation: "https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints"
+    stableCitation: "https://btcwar.net/btc-price"
+
+  limitations:
+    - "Each observation is venue-specific Binance Spot data, not a consolidated global price."
+    - "The API does not provide predictions, trading signals or financial advice."
+    - "Agents must report the quote asset, venue and source timestamp with every price."

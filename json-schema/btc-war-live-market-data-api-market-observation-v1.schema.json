@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://btcwar.net/api/market-observation/v1.schema.json",
+  "title": "BTC War Live Market Observation",
+  "description": "Validation contract for one directly citable, sourced and timestamped Binance Spot USDT observation selected from BTC War's complete nine-market snapshot.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "schema",
+    "id",
+    "canonicalPage",
+    "about",
+    "methodology",
+    "generatedAt",
+    "source",
+    "window",
+    "maxAgeSeconds",
+    "market",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0",
+      "description": "Semantic version of this response contract."
+    },
+    "schema": {
+      "const": "https://btcwar.net/api/market-observation/v1.schema.json",
+      "description": "Authoritative JSON Schema for this response."
+    },
+    "id": {
+      "description": "Stable URL of this symbol-specific live observation.",
+      "enum": [
+        "https://btcwar.net/api/market-observation/v1/BTCUSDT.json",
+        "https://btcwar.net/api/market-observation/v1/ETHUSDT.json",
+        "https://btcwar.net/api/market-observation/v1/BNBUSDT.json",
+        "https://btcwar.net/api/market-observation/v1/SOLUSDT.json",
+        "https://btcwar.net/api/market-observation/v1/XRPUSDT.json",
+        "https://btcwar.net/api/market-observation/v1/TRXUSDT.json",
+        "https://btcwar.net/api/market-observation/v1/DOGEUSDT.json",
+        "https://btcwar.net/api/market-observation/v1/ZECUSDT.json",
+        "https://btcwar.net/api/market-observation/v1/ADAUSDT.json"
+      ]
+    },
+    "canonicalPage": {
+      "const": "https://btcwar.net/btc-price",
+      "description": "Preferred stable human-readable citation."
+    },
+    "about": {
+      "$ref": "https://btcwar.net/api/market-snapshot/v1.schema.json#/properties/about"
+    },
+    "methodology": {
+      "type": "string",
+      "minLength": 1,
+      "description": "How the requested observation was selected and timestamped."
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC time when BTC War generated the underlying validated snapshot."
+    },
+    "source": {
+      "$ref": "https://btcwar.net/api/market-snapshot/v1.schema.json#/properties/source"
+    },
+    "window": {
+      "$ref": "https://btcwar.net/api/market-snapshot/v1.schema.json#/properties/window"
+    },
+    "maxAgeSeconds": {
+      "const": 30,
+      "description": "Maximum intended edge age of a successful observation, in seconds."
+    },
+    "market": {
+      "$ref": "https://btcwar.net/api/market-snapshot/v1.schema.json#/$defs/market"
+    },
+    "limitations": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Scope and interpretation limits, including single-venue coverage and non-advisory use."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "market": {
+            "properties": {
+              "symbol": { "const": "BTCUSDT" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": { "const": "https://btcwar.net/api/market-observation/v1/BTCUSDT.json" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "market": {
+            "properties": {
+              "symbol": { "const": "ETHUSDT" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": { "const": "https://btcwar.net/api/market-observation/v1/ETHUSDT.json" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "market": {
+            "properties": {
+              "symbol": { "const": "BNBUSDT" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": { "const": "https://btcwar.net/api/market-observation/v1/BNBUSDT.json" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "market": {
+            "properties": {
+              "symbol": { "const": "SOLUSDT" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": { "const": "https://btcwar.net/api/market-observation/v1/SOLUSDT.json" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "market": {
+            "properties": {
+              "symbol": { "const": "XRPUSDT" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": { "const": "https://btcwar.net/api/market-observation/v1/XRPUSDT.json" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "market": {
+            "properties": {
+              "symbol": { "const": "TRXUSDT" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": { "const": "https://btcwar.net/api/market-observation/v1/TRXUSDT.json" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "market": {
+            "properties": {
+              "symbol": { "const": "DOGEUSDT" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": { "const": "https://btcwar.net/api/market-observation/v1/DOGEUSDT.json" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "market": {
+            "properties": {
+              "symbol": { "const": "ZECUSDT" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": { "const": "https://btcwar.net/api/market-observation/v1/ZECUSDT.json" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "market": {
+            "properties": {
+              "symbol": { "const": "ADAUSDT" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": { "const": "https://btcwar.net/api/market-observation/v1/ADAUSDT.json" }
+        }
+      }
+    }
+  ]
+}

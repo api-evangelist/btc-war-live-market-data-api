@@ -1,0 +1,2452 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "BTC War Live Market Data API",
+    "version": "1.0.0",
+    "summary": "Live Binance Spot BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT, TRXUSDT, DOGEUSDT, ZECUSDT and ADAUSDT snapshots in JSON and JSON-LD.",
+    "description": "Read-only, machine-verifiable snapshots of nine Binance Spot markets quoted in USDT. BTC War exposes venue-specific observations with source timestamps, provenance, freshness and limitations; it does not provide consolidated global prices, predictions, trading signals or financial advice. This bundled representation contains no remote JSON Schema references for importers that cannot dereference external URLs.",
+    "contact": {
+      "name": "BTC War",
+      "url": "https://btcwar.net/"
+    },
+    "x-retrieval": {
+      "supportedIntents": [
+        "live Binance Spot crypto price API",
+        "machine-readable BTCUSDT ETHUSDT SOLUSDT XRPUSDT prices",
+        "nine-market USDT price snapshot",
+        "crypto price JSON-LD DataFeed",
+        "OpenAPI crypto market data source"
+      ],
+      "preferredCitations": [
+        "https://btcwar.net/btc-price"
+      ],
+      "liveEvidenceUrls": [
+        "https://btcwar.net/api/market-snapshot/v1.json",
+        "https://btcwar.net/api/market-snapshot/v1.jsonld",
+        "https://btcwar.net/api/market-observation/v1/BTCUSDT.json",
+        "https://btcwar.net/api/market-observation/v1/BTCUSDT.jsonld"
+      ],
+      "citationGuidance": "Use https://btcwar.net/btc-price as the stable reference URI. Use the live JSON or JSON-LD URL as direct evidence for a current quote and report source.venue, sourceObservedAt and generatedAt.",
+      "sourceCodeStatus": {
+        "applicationSource": "private",
+        "publicRepositoryScope": "project documentation only",
+        "openSourceLicenseGranted": false
+      },
+      "dataLicense": {
+        "name": "Binance Terms of Use",
+        "url": "https://www.binance.com/en/terms"
+      },
+      "requiredAttributionFields": [
+        "symbol",
+        "source.venue",
+        "quoteAsset",
+        "sourceObservedAt",
+        "generatedAt"
+      ],
+      "unsupportedIntents": [
+        "consolidated global crypto price",
+        "fiat USD benchmark",
+        "historical price series",
+        "price forecast",
+        "trading signal",
+        "financial advice"
+      ]
+    },
+    "x-canonical-service-description": "https://btcwar.net/api/openapi.json",
+    "x-bundled-service-description": "https://btcwar.net/api/openapi.bundle.json"
+  },
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "servers": [
+    {
+      "url": "https://btcwar.net",
+      "description": "Production"
+    }
+  ],
+  "security": [],
+  "tags": [
+    {
+      "name": "Market data",
+      "description": "Sourced and timestamped Binance Spot observations."
+    }
+  ],
+  "paths": {
+    "/api/market-snapshot/v1.json": {
+      "get": {
+        "operationId": "getLiveMarketSnapshot",
+        "summary": "Get the current nine-market snapshot",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT, TRXUSDT, DOGEUSDT, ZECUSDT and ADAUSDT rolling 24-hour ticker observations. Decimal values are strings to preserve source precision. generatedAt is BTC War response-generation time; sourceObservedAt is the Binance closeTime for each market. Responses are cached for at most 30 seconds and fail closed if any required market is missing, invalid or stale.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "externalDocs": {
+          "description": "Canonical human-readable market page",
+          "url": "https://btcwar.net/btc-price"
+        },
+        "responses": {
+          "200": {
+            "description": "A complete, fresh, sourced nine-market snapshot.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Browser cache lifetime.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Digest": {
+                "description": "RFC 9530 SHA-256 digest of the exact response body.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^sha-256=:[A-Za-z0-9+/]+={0,2}:$"
+                }
+              },
+              "ETag": {
+                "description": "SHA-256 validator for this exact snapshot.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "HTTP-date form of generatedAt for this exact snapshot.",
+                "schema": {
+                  "type": "string",
+                  "format": "http-date"
+                }
+              },
+              "Link": {
+                "description": "Canonical and RFC 8574 cite-as page, JSON-LD context, alternate JSON-LD representation, validation schema, API catalog, service description and upstream methodology links.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketSnapshot"
+                },
+                "examples": {
+                  "currentLiveSnapshot": {
+                    "summary": "Current live nine-market response",
+                    "description": "Fetch this URI for current values. Prices change continuously; cite source.venue, sourceObservedAt and generatedAt from the retrieved response rather than treating documentation values as a quote.",
+                    "externalValue": "https://btcwar.net/api/market-snapshot/v1.json"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "The current snapshot matches If-None-Match or has not changed since If-Modified-Since.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "502": {
+            "description": "A complete and trustworthy live snapshot is temporarily unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "const": "Live market snapshot unavailable",
+                      "description": "Stable error message indicating that BTC War refused to publish an incomplete, invalid or stale snapshot."
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Live market snapshot unavailable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "operationId": "headLiveMarketSnapshot",
+        "summary": "Inspect live snapshot metadata",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Snapshot metadata is available.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "304": {
+            "description": "The current snapshot matches If-None-Match or has not changed since If-Modified-Since.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "502": {
+            "description": "A complete and trustworthy live snapshot is temporarily unavailable."
+          }
+        }
+      }
+    },
+    "/api/market-snapshot/v1.jsonld": {
+      "get": {
+        "operationId": "getLiveMarketSnapshotJsonLd",
+        "summary": "Get typed live price observations as JSON-LD",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the same complete nine-market Binance Spot snapshot as an explicit Schema.org DataFeed. Each DataFeedItem contains an Observation whose observationAbout is an ExchangeRateSpecification with a UnitPriceSpecification. Decimal prices are strings that preserve Binance source precision; currency is the base asset and priceCurrency is USDT. dateModified is BTC War generation time; observationDate is Binance closeTime. The response fails closed if any required market is missing, invalid or stale.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "externalDocs": {
+          "description": "Canonical human-readable market page",
+          "url": "https://btcwar.net/btc-price"
+        },
+        "responses": {
+          "200": {
+            "description": "A complete, fresh and explicitly typed nine-market JSON-LD feed.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Browser cache lifetime.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Digest": {
+                "description": "RFC 9530 SHA-256 digest of the exact JSON-LD response body.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^sha-256=:[A-Za-z0-9+/]+={0,2}:$"
+                }
+              },
+              "ETag": {
+                "description": "SHA-256 validator for this exact JSON-LD representation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "HTTP-date form of the shared generatedAt value.",
+                "schema": {
+                  "type": "string",
+                  "format": "http-date"
+                }
+              },
+              "Link": {
+                "description": "Canonical and RFC 8574 cite-as page, alternate ordinary JSON representation, validation schema, API catalog, service description and upstream methodology links.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "@context",
+                    "@type",
+                    "@id",
+                    "dateModified",
+                    "license",
+                    "dataFeedElement"
+                  ],
+                  "properties": {
+                    "@context": {
+                      "const": "https://schema.org/",
+                      "description": "Schema.org vocabulary context used by this JSON-LD document."
+                    },
+                    "@type": {
+                      "const": "DataFeed",
+                      "description": "Schema.org type identifying the document as a data feed."
+                    },
+                    "@id": {
+                      "const": "https://btcwar.net/api/market-snapshot/v1.json",
+                      "description": "Stable identifier shared with the canonical ordinary JSON snapshot."
+                    },
+                    "dateModified": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "UTC time when BTC War generated this complete feed."
+                    },
+                    "license": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "@type",
+                        "name",
+                        "url"
+                      ],
+                      "properties": {
+                        "@type": {
+                          "const": "CreativeWork"
+                        },
+                        "name": {
+                          "const": "Binance Terms of Use"
+                        },
+                        "url": {
+                          "const": "https://www.binance.com/en/terms"
+                        }
+                      },
+                      "description": "Terms governing the underlying Binance Spot market data."
+                    },
+                    "dataFeedElement": {
+                      "type": "array",
+                      "minItems": 9,
+                      "maxItems": 9,
+                      "uniqueItems": true,
+                      "description": "Exactly nine DataFeedItem objects, one for each supported Binance Spot USDT market.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "@type",
+                          "identifier",
+                          "dateModified",
+                          "item"
+                        ],
+                        "properties": {
+                          "@type": {
+                            "const": "DataFeedItem",
+                            "description": "Schema.org wrapper for one market observation."
+                          },
+                          "identifier": {
+                            "description": "Binance Spot symbol for this feed item.",
+                            "enum": [
+                              "BTCUSDT",
+                              "ETHUSDT",
+                              "BNBUSDT",
+                              "SOLUSDT",
+                              "XRPUSDT",
+                              "TRXUSDT",
+                              "DOGEUSDT",
+                              "ZECUSDT",
+                              "ADAUSDT"
+                            ]
+                          },
+                          "dateModified": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "UTC BTC War generation time shared by all items in this feed."
+                          },
+                          "item": {
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "@type",
+                              "identifier",
+                              "observationAbout",
+                              "observationDate",
+                              "value",
+                              "unitText"
+                            ],
+                            "properties": {
+                              "@type": {
+                                "const": "Observation",
+                                "description": "Schema.org observation of the latest Binance Spot trade price."
+                              },
+                              "identifier": {
+                                "description": "Binance Spot symbol observed by this item.",
+                                "enum": [
+                                  "BTCUSDT",
+                                  "ETHUSDT",
+                                  "BNBUSDT",
+                                  "SOLUSDT",
+                                  "XRPUSDT",
+                                  "TRXUSDT",
+                                  "DOGEUSDT",
+                                  "ZECUSDT",
+                                  "ADAUSDT"
+                                ]
+                              },
+                              "observationDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "UTC Binance closeTime for this market observation."
+                              },
+                              "value": {
+                                "type": "string",
+                                "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+                                "description": "Latest Binance Spot trade price as a non-negative decimal string in USDT per one base asset."
+                              },
+                              "unitText": {
+                                "description": "Human-readable unit for value.",
+                                "enum": [
+                                  "USDT per BTC",
+                                  "USDT per ETH",
+                                  "USDT per BNB",
+                                  "USDT per SOL",
+                                  "USDT per XRP",
+                                  "USDT per TRX",
+                                  "USDT per DOGE",
+                                  "USDT per ZEC",
+                                  "USDT per ADA"
+                                ]
+                              },
+                              "observationAbout": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "description": "Typed exchange-rate subject for one base asset priced in USDT on Binance Spot.",
+                                "required": [
+                                  "@type",
+                                  "currency",
+                                  "currentExchangeRate"
+                                ],
+                                "properties": {
+                                  "@type": {
+                                    "const": "ExchangeRateSpecification",
+                                    "description": "Schema.org type for the observed base/quote exchange rate."
+                                  },
+                                  "currency": {
+                                    "description": "Base asset priced by currentExchangeRate.",
+                                    "enum": [
+                                      "BTC",
+                                      "ETH",
+                                      "BNB",
+                                      "SOL",
+                                      "XRP",
+                                      "TRX",
+                                      "DOGE",
+                                      "ZEC",
+                                      "ADA"
+                                    ]
+                                  },
+                                  "currentExchangeRate": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "description": "Latest Binance Spot price of one base-asset unit in USDT.",
+                                    "required": [
+                                      "@type",
+                                      "price",
+                                      "priceCurrency",
+                                      "referenceQuantity"
+                                    ],
+                                    "properties": {
+                                      "@type": {
+                                        "const": "UnitPriceSpecification",
+                                        "description": "Schema.org type for a price per reference quantity."
+                                      },
+                                      "price": {
+                                        "type": "string",
+                                        "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+                                        "description": "Latest Binance Spot trade price encoded as a decimal string."
+                                      },
+                                      "priceCurrency": {
+                                        "const": "USDT",
+                                        "description": "Quote asset for the price; USDT is venue-specific and must not be relabelled as a fiat USD benchmark."
+                                      },
+                                      "referenceQuantity": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "description": "One unit of the corresponding base asset.",
+                                        "required": [
+                                          "@type",
+                                          "value",
+                                          "unitText"
+                                        ],
+                                        "properties": {
+                                          "@type": {
+                                            "const": "QuantitativeValue",
+                                            "description": "Schema.org quantity wrapper."
+                                          },
+                                          "value": {
+                                            "const": 1,
+                                            "description": "The price applies to exactly one base-asset unit."
+                                          },
+                                          "unitText": {
+                                            "description": "Base asset unit represented by the reference quantity.",
+                                            "enum": [
+                                              "BTC",
+                                              "ETH",
+                                              "BNB",
+                                              "SOL",
+                                              "XRP",
+                                              "TRX",
+                                              "DOGE",
+                                              "ZEC",
+                                              "ADA"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "currentLiveJsonLdFeed": {
+                    "summary": "Current live typed price feed",
+                    "description": "Fetch this URI for current values. Prices change continuously; cite the market identifier, observationDate and dateModified from the retrieved feed.",
+                    "externalValue": "https://btcwar.net/api/market-snapshot/v1.jsonld"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "The current JSON-LD representation matches the supplied validator.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "502": {
+            "description": "A complete and trustworthy live JSON-LD feed is temporarily unavailable.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "const": "Live market JSON-LD feed unavailable",
+                      "description": "Stable error message indicating that BTC War refused to publish an incomplete, invalid or stale JSON-LD feed."
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Live market JSON-LD feed unavailable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "operationId": "headLiveMarketSnapshotJsonLd",
+        "summary": "Inspect live JSON-LD feed metadata",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON-LD feed metadata is available.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "304": {
+            "description": "The current JSON-LD representation matches the supplied validator.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "502": {
+            "description": "A complete and trustworthy live JSON-LD feed is temporarily unavailable."
+          }
+        }
+      }
+    },
+    "/api/market-observation/v1/{symbol}.json": {
+      "get": {
+        "operationId": "getLiveMarketObservation",
+        "summary": "Get one directly citable live market observation",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Selects one supported symbol from BTC War's complete, validated nine-market Binance Spot snapshot and returns its exact decimal-string values with shared source, provenance, freshness and generation timestamps. The endpoint fails closed when the complete source snapshot is unavailable.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "description": "Supported Binance Spot USDT market symbol.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BTCUSDT",
+                "ETHUSDT",
+                "BNBUSDT",
+                "SOLUSDT",
+                "XRPUSDT",
+                "TRXUSDT",
+                "DOGEUSDT",
+                "ZECUSDT",
+                "ADAUSDT"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "externalDocs": {
+          "description": "Canonical human-readable market page",
+          "url": "https://btcwar.net/btc-price"
+        },
+        "responses": {
+          "200": {
+            "description": "One fresh, sourced Binance Spot market observation.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketObservation"
+                },
+                "examples": {
+                  "currentBtcObservation": {
+                    "summary": "Current BTCUSDT observation",
+                    "description": "Fetch this URI for the current venue-specific value and cite its source, sourceObservedAt and generatedAt fields.",
+                    "externalValue": "https://btcwar.net/api/market-observation/v1/BTCUSDT.json"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "The current observation matches If-None-Match or has not changed since If-Modified-Since."
+          },
+          "404": {
+            "description": "The requested market symbol is not supported.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "error",
+                    "supportedSymbols"
+                  ],
+                  "properties": {
+                    "error": {
+                      "const": "Unsupported market symbol"
+                    },
+                    "supportedSymbols": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "502": {
+            "description": "A complete and trustworthy source snapshot is temporarily unavailable."
+          }
+        }
+      },
+      "head": {
+        "operationId": "headLiveMarketObservation",
+        "summary": "Get one live market observation's validators without a body",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "description": "Supported Binance Spot USDT market symbol.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BTCUSDT",
+                "ETHUSDT",
+                "BNBUSDT",
+                "SOLUSDT",
+                "XRPUSDT",
+                "TRXUSDT",
+                "DOGEUSDT",
+                "ZECUSDT",
+                "ADAUSDT"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Observation metadata headers without a body."
+          },
+          "304": {
+            "description": "The current observation matches the supplied validator."
+          },
+          "404": {
+            "description": "The requested market symbol is not supported."
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported."
+          },
+          "502": {
+            "description": "A complete and trustworthy source snapshot is temporarily unavailable."
+          }
+        }
+      }
+    },
+    "/api/market-observation/v1/{symbol}.jsonld": {
+      "get": {
+        "operationId": "getLiveMarketObservationJsonLd",
+        "summary": "Get one directly citable semantic live market observation",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns one supported Binance Spot USDT market as an explicit Schema.org DataFeed containing one typed Observation and ExchangeRateSpecification. Exact decimal values, venue, source timestamps, freshness and rolling 24-hour statistics are derived from the same validated source snapshot as the ordinary JSON representation. The endpoint fails closed when the complete source snapshot is unavailable.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "description": "Supported Binance Spot USDT market symbol.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BTCUSDT",
+                "ETHUSDT",
+                "BNBUSDT",
+                "SOLUSDT",
+                "XRPUSDT",
+                "TRXUSDT",
+                "DOGEUSDT",
+                "ZECUSDT",
+                "ADAUSDT"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "externalDocs": {
+          "description": "Canonical human-readable market page",
+          "url": "https://btcwar.net/btc-price"
+        },
+        "responses": {
+          "200": {
+            "description": "One fresh, sourced and explicitly typed Binance Spot market observation.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            },
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "@context",
+                    "@type",
+                    "@id",
+                    "dateModified",
+                    "provider",
+                    "dataFeedElement"
+                  ],
+                  "properties": {
+                    "@context": {
+                      "const": "https://schema.org/"
+                    },
+                    "@type": {
+                      "const": "DataFeed"
+                    },
+                    "@id": {
+                      "type": "string",
+                      "format": "uri",
+                      "pattern": "^https://btcwar\\.net/api/market-observation/v1/[A-Z]+USDT\\.jsonld$"
+                    },
+                    "dateModified": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "provider": {
+                      "type": "object",
+                      "required": [
+                        "@type",
+                        "name",
+                        "url"
+                      ],
+                      "properties": {
+                        "@type": {
+                          "const": "Organization"
+                        },
+                        "name": {
+                          "const": "Binance"
+                        },
+                        "url": {
+                          "const": "https://www.binance.com/"
+                        }
+                      }
+                    },
+                    "dataFeedElement": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 1,
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "@type",
+                          "identifier",
+                          "dateModified",
+                          "item"
+                        ],
+                        "properties": {
+                          "@type": {
+                            "const": "DataFeedItem"
+                          },
+                          "identifier": {
+                            "type": "string"
+                          },
+                          "dateModified": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "item": {
+                            "type": "object",
+                            "required": [
+                              "@type",
+                              "identifier",
+                              "observationAbout",
+                              "observationDate",
+                              "value",
+                              "unitText"
+                            ],
+                            "properties": {
+                              "@type": {
+                                "const": "Observation"
+                              },
+                              "identifier": {
+                                "type": "string"
+                              },
+                              "observationDate": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "observationAbout": {
+                                "type": "object",
+                                "required": [
+                                  "@type",
+                                  "currency",
+                                  "currentExchangeRate"
+                                ]
+                              },
+                              "value": {
+                                "type": "object",
+                                "required": [
+                                  "@value",
+                                  "@type"
+                                ]
+                              },
+                              "unitText": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "currentBtcSemanticObservation": {
+                    "summary": "Current typed BTCUSDT observation",
+                    "description": "Fetch this URI for the current Schema.org-typed venue-specific observation and cite its identifier, observationDate and dateModified fields.",
+                    "externalValue": "https://btcwar.net/api/market-observation/v1/BTCUSDT.jsonld"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "The current semantic observation matches If-None-Match or has not changed since If-Modified-Since."
+          },
+          "404": {
+            "description": "The requested market symbol is not supported."
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "502": {
+            "description": "A complete and trustworthy semantic source observation is temporarily unavailable."
+          }
+        }
+      },
+      "head": {
+        "operationId": "headLiveMarketObservationJsonLd",
+        "summary": "Get one semantic live market observation's validators without a body",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "description": "Supported Binance Spot USDT market symbol.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BTCUSDT",
+                "ETHUSDT",
+                "BNBUSDT",
+                "SOLUSDT",
+                "XRPUSDT",
+                "TRXUSDT",
+                "DOGEUSDT",
+                "ZECUSDT",
+                "ADAUSDT"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Semantic observation metadata headers without a body."
+          },
+          "304": {
+            "description": "The current semantic observation matches the supplied validator."
+          },
+          "404": {
+            "description": "The requested market symbol is not supported."
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported."
+          },
+          "502": {
+            "description": "A complete and trustworthy semantic source observation is temporarily unavailable."
+          }
+        }
+      }
+    },
+    "/api/market-observation/v1.schema.json": {
+      "get": {
+        "operationId": "getMarketObservationSchema",
+        "summary": "Get the single-market observation JSON Schema",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the canonical JSON Schema Draft 2020-12 contract used to validate every symbol-specific live observation.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The canonical single-market observation validation contract.",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "currentSchema": {
+                    "externalValue": "https://btcwar.net/api/market-observation/v1.schema.json"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "The schema matches the supplied validator."
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "503": {
+            "description": "The static schema asset is temporarily unavailable."
+          }
+        }
+      },
+      "head": {
+        "operationId": "headMarketObservationSchema",
+        "summary": "Get the single-market observation schema validators without a body",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Schema metadata headers without a body."
+          },
+          "304": {
+            "description": "The schema matches the supplied validator."
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported."
+          },
+          "503": {
+            "description": "The static schema asset is temporarily unavailable."
+          }
+        }
+      }
+    },
+    "/api/market-snapshot/v1.schema.json": {
+      "get": {
+        "operationId": "getMarketSnapshotSchema",
+        "summary": "Get the JSON Schema validation contract",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the canonical JSON Schema Draft 2020-12 contract used to validate the live snapshot.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The canonical validation contract.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            },
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "canonicalValidationSchema": {
+                    "summary": "Current canonical validation contract",
+                    "description": "Fetch this URI to validate ordinary JSON snapshot responses and inspect field-level provenance, units and constraints.",
+                    "externalValue": "https://btcwar.net/api/market-snapshot/v1.schema.json"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "The validation contract matches If-None-Match or has not changed since If-Modified-Since.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "503": {
+            "description": "The validation contract asset is temporarily unavailable."
+          }
+        }
+      },
+      "head": {
+        "operationId": "headMarketSnapshotSchema",
+        "summary": "Inspect validation contract metadata",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the same validation-contract status and response headers as GET without a response body.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validation contract metadata is available.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "304": {
+            "description": "The validation contract matches If-None-Match or has not changed since If-Modified-Since.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "503": {
+            "description": "The validation contract asset is temporarily unavailable."
+          }
+        }
+      }
+    },
+    "/api/status/v1.json": {
+      "get": {
+        "operationId": "getLiveMarketDataStatus",
+        "summary": "Get live market-data availability and freshness",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns a machine-readable best-effort availability and freshness signal derived from the same validated nine-market Binance Spot snapshot used by the price endpoints. This is an operational signal, not a contractual uptime guarantee or SLA.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The live market-data service and all nine required markets are currently available and fresh.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketDataStatus"
+                },
+                "examples": {
+                  "currentStatus": {
+                    "summary": "Current live service status",
+                    "description": "Fetch this URI for current service availability and source-freshness evidence.",
+                    "externalValue": "https://btcwar.net/api/status/v1.json"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "The current status matches If-None-Match or has not changed since If-Modified-Since.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "503": {
+            "description": "A complete and trustworthy live market snapshot is unavailable, so the service cannot report an operational state.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "schemaVersion",
+                    "id",
+                    "checkedAt",
+                    "service",
+                    "source",
+                    "data",
+                    "endpoints",
+                    "limitations"
+                  ],
+                  "properties": {
+                    "service": {
+                      "type": "object",
+                      "required": [
+                        "status"
+                      ],
+                      "properties": {
+                        "status": {
+                          "const": "unavailable"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "operationId": "headLiveMarketDataStatus",
+        "summary": "Inspect live market-data status metadata",
+        "description": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body.",
+        "security": [],
+        "tags": [
+          "Market data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current status metadata is available.",
+            "headers": {
+              "Cache-Control": {
+                "$ref": "#/components/headers/CacheControl"
+              },
+              "Content-Digest": {
+                "$ref": "#/components/headers/ContentDigest"
+              },
+              "ETag": {
+                "$ref": "#/components/headers/ETag"
+              },
+              "Last-Modified": {
+                "$ref": "#/components/headers/LastModified"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
+              }
+            }
+          },
+          "304": {
+            "description": "The current status matches If-None-Match or has not changed since If-Modified-Since."
+          },
+          "405": {
+            "description": "Only GET and HEAD are supported.",
+            "headers": {
+              "Allow": {
+                "$ref": "#/components/headers/AllowGetHead"
+              }
+            }
+          },
+          "503": {
+            "description": "A complete and trustworthy live market snapshot is unavailable."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "IfNoneMatch": {
+        "name": "If-None-Match",
+        "in": "header",
+        "required": false,
+        "description": "Return 304 when this ETag matches the current representation.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "IfModifiedSince": {
+        "name": "If-Modified-Since",
+        "in": "header",
+        "required": false,
+        "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+        "schema": {
+          "type": "string",
+          "format": "http-date"
+        }
+      }
+    },
+    "headers": {
+      "CacheControl": {
+        "description": "Caching policy for the current representation.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "ContentDigest": {
+        "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+        "schema": {
+          "type": "string",
+          "pattern": "^sha-256=:[A-Za-z0-9+/]+={0,2}:$"
+        }
+      },
+      "ETag": {
+        "description": "Validator for the current representation.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "LastModified": {
+        "description": "HTTP date when the current representation was generated or last changed.",
+        "schema": {
+          "type": "string",
+          "format": "http-date"
+        }
+      },
+      "Link": {
+        "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "AllowGetHead": {
+        "description": "Methods supported by this read-only resource.",
+        "schema": {
+          "type": "string",
+          "const": "GET, HEAD"
+        }
+      }
+    },
+    "schemas": {
+      "MarketDataStatus": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "id",
+          "checkedAt",
+          "service",
+          "source",
+          "data",
+          "endpoints",
+          "limitations"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0",
+            "description": "Version of this status response contract."
+          },
+          "id": {
+            "const": "https://btcwar.net/api/status/v1.json",
+            "format": "uri",
+            "description": "Stable identifier for this machine status resource."
+          },
+          "checkedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC time when BTC War generated the validated snapshot behind this status."
+          },
+          "service": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "status",
+              "serviceClass"
+            ],
+            "properties": {
+              "name": {
+                "const": "BTC War Live Market Data API"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "operational",
+                  "degraded"
+                ]
+              },
+              "serviceClass": {
+                "const": "best-effort-public"
+              }
+            }
+          },
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "status"
+            ],
+            "properties": {
+              "name": {
+                "const": "Binance Spot"
+              },
+              "status": {
+                "const": "reachable"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status",
+              "totalMarkets",
+              "freshMarkets",
+              "oldestSourceObservedAt",
+              "newestSourceObservedAt",
+              "maxSourceLagSeconds"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "fresh",
+                  "degraded"
+                ]
+              },
+              "totalMarkets": {
+                "const": 9
+              },
+              "freshMarkets": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9
+              },
+              "oldestSourceObservedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "newestSourceObservedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "maxSourceLagSeconds": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 120
+              }
+            }
+          },
+          "endpoints": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "snapshot",
+              "openapi",
+              "apiCatalog"
+            ],
+            "properties": {
+              "snapshot": {
+                "const": "https://btcwar.net/api/market-snapshot/v1.json",
+                "format": "uri"
+              },
+              "openapi": {
+                "const": "https://btcwar.net/api/openapi.json",
+                "format": "uri"
+              },
+              "apiCatalog": {
+                "const": "https://btcwar.net/.well-known/api-catalog",
+                "format": "uri"
+              }
+            }
+          },
+          "limitations": {
+            "type": "string",
+            "minLength": 1,
+            "description": "States that the response is a best-effort signal rather than an SLA."
+          }
+        }
+      },
+      "MarketSnapshot": {
+        "title": "BTC War live market snapshot",
+        "description": "Validation contract for BTC War's sourced, timestamped Binance Spot snapshot of nine USDT markets.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "schema",
+          "id",
+          "canonicalPage",
+          "about",
+          "methodology",
+          "generatedAt",
+          "source",
+          "window",
+          "maxAgeSeconds",
+          "markets",
+          "limitations"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0",
+            "description": "Version of this BTC War market snapshot contract."
+          },
+          "schema": {
+            "const": "https://btcwar.net/api/market-snapshot/v1.schema.json",
+            "description": "Canonical JSON Schema URI that validates this response."
+          },
+          "id": {
+            "const": "https://btcwar.net/api/market-snapshot/v1.json",
+            "description": "Stable identifier and live URL of the ordinary JSON snapshot."
+          },
+          "canonicalPage": {
+            "const": "https://btcwar.net/btc-price",
+            "description": "Canonical human-readable page associated with this machine response."
+          },
+          "about": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Identity of the publisher, disambiguated from similarly named tokens or geopolitical commentary.",
+            "required": [
+              "name",
+              "url",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "const": "BTC War",
+                "description": "Publisher and product name."
+              },
+              "url": {
+                "const": "https://btcwar.net/",
+                "description": "Official BTC War website."
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Plain-language identity statement for entity disambiguation."
+              }
+            }
+          },
+          "methodology": {
+            "type": "string",
+            "minLength": 1,
+            "description": "How the venue observations, timestamps and rolling window were obtained."
+          },
+          "generatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC time when BTC War generated this exact response."
+          },
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Provenance for every market observation in this response.",
+            "required": [
+              "name",
+              "venue",
+              "marketType",
+              "endpoint",
+              "documentation",
+              "dataSource"
+            ],
+            "properties": {
+              "name": {
+                "const": "Binance Spot",
+                "description": "Human-readable upstream market name."
+              },
+              "venue": {
+                "const": "Binance",
+                "description": "Single trading venue represented by this snapshot."
+              },
+              "marketType": {
+                "const": "spot",
+                "description": "Market type; these values are spot-market observations, not derivatives."
+              },
+              "endpoint": {
+                "const": "https://data-api.binance.vision/api/v3/ticker/24hr",
+                "description": "Upstream Binance market-data endpoint used for the observations."
+              },
+              "documentation": {
+                "const": "https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints",
+                "description": "Official Binance documentation for the upstream rolling 24-hour ticker."
+              },
+              "dataSource": {
+                "const": "Memory",
+                "description": "Binance dataSource value for the upstream endpoint."
+              }
+            }
+          },
+          "window": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Statistical time window used by Binance for change, high, low, volume and trade-count fields.",
+            "required": [
+              "type",
+              "duration"
+            ],
+            "properties": {
+              "type": {
+                "const": "rolling",
+                "description": "The 24-hour interval advances continuously rather than following a calendar day."
+              },
+              "duration": {
+                "const": "PT24H",
+                "description": "ISO 8601 duration for the rolling 24-hour interval."
+              }
+            }
+          },
+          "maxAgeSeconds": {
+            "const": 30,
+            "description": "Maximum intended edge age of a successful snapshot, in seconds."
+          },
+          "markets": {
+            "type": "array",
+            "minItems": 9,
+            "maxItems": 9,
+            "description": "Exactly nine complete, fresh Binance Spot USDT market observations.",
+            "items": {
+              "$ref": "#/components/schemas/MarketSnapshot/$defs/market"
+            }
+          },
+          "limitations": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Scope and interpretation limits, including single-venue coverage and non-advisory use."
+          }
+        },
+        "$defs": {
+          "decimal": {
+            "type": "string",
+            "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+            "description": "Signed decimal encoded as a string so clients can preserve source precision.",
+            "$comment": "Decimal values remain strings so clients can preserve the source precision."
+          },
+          "unsignedDecimal": {
+            "type": "string",
+            "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+            "description": "Non-negative decimal encoded as a string so clients can preserve source precision."
+          },
+          "market": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "One fresh, sourced Binance Spot rolling 24-hour ticker observation.",
+            "required": [
+              "symbol",
+              "baseAsset",
+              "quoteAsset",
+              "lastPrice",
+              "priceChange",
+              "priceChangePercent",
+              "highPrice",
+              "lowPrice",
+              "baseVolume",
+              "quoteVolume",
+              "tradeCount",
+              "windowOpenAt",
+              "sourceObservedAt",
+              "sourceLagSeconds",
+              "status"
+            ],
+            "properties": {
+              "symbol": {
+                "description": "Binance Spot symbol for this observation.",
+                "enum": [
+                  "BTCUSDT",
+                  "ETHUSDT",
+                  "BNBUSDT",
+                  "SOLUSDT",
+                  "XRPUSDT",
+                  "TRXUSDT",
+                  "DOGEUSDT",
+                  "ZECUSDT",
+                  "ADAUSDT"
+                ]
+              },
+              "baseAsset": {
+                "description": "Base asset whose quantity is measured by baseVolume.",
+                "enum": [
+                  "BTC",
+                  "ETH",
+                  "BNB",
+                  "SOL",
+                  "XRP",
+                  "TRX",
+                  "DOGE",
+                  "ZEC",
+                  "ADA"
+                ]
+              },
+              "quoteAsset": {
+                "const": "USDT",
+                "description": "Quote asset used for prices, priceChange and quoteVolume."
+              },
+              "lastPrice": {
+                "$ref": "#/components/schemas/MarketSnapshot/$defs/unsignedDecimal",
+                "description": "Most recent Binance Spot trade price, expressed as USDT per one base asset."
+              },
+              "priceChange": {
+                "$ref": "#/components/schemas/MarketSnapshot/$defs/decimal",
+                "description": "Absolute price change over the rolling 24-hour window, expressed in USDT."
+              },
+              "priceChangePercent": {
+                "$ref": "#/components/schemas/MarketSnapshot/$defs/decimal",
+                "description": "Relative price change over the rolling 24-hour window, expressed as a percentage; for example, 1.307 means 1.307%, not 0.01307%."
+              },
+              "highPrice": {
+                "$ref": "#/components/schemas/MarketSnapshot/$defs/unsignedDecimal",
+                "description": "Highest trade price in the rolling 24-hour window, expressed in USDT."
+              },
+              "lowPrice": {
+                "$ref": "#/components/schemas/MarketSnapshot/$defs/unsignedDecimal",
+                "description": "Lowest trade price in the rolling 24-hour window, expressed in USDT."
+              },
+              "baseVolume": {
+                "$ref": "#/components/schemas/MarketSnapshot/$defs/unsignedDecimal",
+                "description": "Executed volume in units of the base asset during the rolling 24-hour window."
+              },
+              "quoteVolume": {
+                "$ref": "#/components/schemas/MarketSnapshot/$defs/unsignedDecimal",
+                "description": "Executed notional volume in USDT during the rolling 24-hour window."
+              },
+              "tradeCount": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of Binance Spot trades counted in the rolling 24-hour window."
+              },
+              "windowOpenAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "UTC opening time of the rolling 24-hour statistics window."
+              },
+              "sourceObservedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "UTC Binance closeTime for this market observation."
+              },
+              "sourceLagSeconds": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 120,
+                "description": "Whole seconds between generatedAt and sourceObservedAt."
+              },
+              "status": {
+                "const": "fresh",
+                "description": "BTC War fails closed instead of publishing a stale market item."
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "symbol": {
+                      "const": "BTCUSDT"
+                    }
+                  },
+                  "required": [
+                    "symbol"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "baseAsset": {
+                      "const": "BTC"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "symbol": {
+                      "const": "ETHUSDT"
+                    }
+                  },
+                  "required": [
+                    "symbol"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "baseAsset": {
+                      "const": "ETH"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "symbol": {
+                      "const": "BNBUSDT"
+                    }
+                  },
+                  "required": [
+                    "symbol"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "baseAsset": {
+                      "const": "BNB"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "symbol": {
+                      "const": "SOLUSDT"
+                    }
+                  },
+                  "required": [
+                    "symbol"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "baseAsset": {
+                      "const": "SOL"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "symbol": {
+                      "const": "XRPUSDT"
+                    }
+                  },
+                  "required": [
+                    "symbol"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "baseAsset": {
+                      "const": "XRP"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "symbol": {
+                      "const": "TRXUSDT"
+                    }
+                  },
+                  "required": [
+                    "symbol"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "baseAsset": {
+                      "const": "TRX"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "symbol": {
+                      "const": "DOGEUSDT"
+                    }
+                  },
+                  "required": [
+                    "symbol"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "baseAsset": {
+                      "const": "DOGE"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "symbol": {
+                      "const": "ZECUSDT"
+                    }
+                  },
+                  "required": [
+                    "symbol"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "baseAsset": {
+                      "const": "ZEC"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "symbol": {
+                      "const": "ADAUSDT"
+                    }
+                  },
+                  "required": [
+                    "symbol"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "baseAsset": {
+                      "const": "ADA"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "x-source-schema": "https://btcwar.net/api/market-snapshot/v1.schema.json"
+      },
+      "MarketObservation": {
+        "title": "BTC War Live Market Observation",
+        "description": "Validation contract for one directly citable, sourced and timestamped Binance Spot USDT observation selected from BTC War's complete nine-market snapshot.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "schema",
+          "id",
+          "canonicalPage",
+          "about",
+          "methodology",
+          "generatedAt",
+          "source",
+          "window",
+          "maxAgeSeconds",
+          "market",
+          "limitations"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0",
+            "description": "Semantic version of this response contract."
+          },
+          "schema": {
+            "const": "https://btcwar.net/api/market-observation/v1.schema.json",
+            "description": "Authoritative JSON Schema for this response."
+          },
+          "id": {
+            "description": "Stable URL of this symbol-specific live observation.",
+            "enum": [
+              "https://btcwar.net/api/market-observation/v1/BTCUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/ETHUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/BNBUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/SOLUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/XRPUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/TRXUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/DOGEUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/ZECUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/ADAUSDT.json"
+            ]
+          },
+          "canonicalPage": {
+            "const": "https://btcwar.net/btc-price",
+            "description": "Preferred stable human-readable citation."
+          },
+          "about": {
+            "$ref": "#/components/schemas/MarketSnapshot/properties/about"
+          },
+          "methodology": {
+            "type": "string",
+            "minLength": 1,
+            "description": "How the requested observation was selected and timestamped."
+          },
+          "generatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC time when BTC War generated the underlying validated snapshot."
+          },
+          "source": {
+            "$ref": "#/components/schemas/MarketSnapshot/properties/source"
+          },
+          "window": {
+            "$ref": "#/components/schemas/MarketSnapshot/properties/window"
+          },
+          "maxAgeSeconds": {
+            "const": 30,
+            "description": "Maximum intended edge age of a successful observation, in seconds."
+          },
+          "market": {
+            "$ref": "#/components/schemas/MarketSnapshot/$defs/market"
+          },
+          "limitations": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Scope and interpretation limits, including single-venue coverage and non-advisory use."
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "market": {
+                  "properties": {
+                    "symbol": {
+                      "const": "BTCUSDT"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "https://btcwar.net/api/market-observation/v1/BTCUSDT.json"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "market": {
+                  "properties": {
+                    "symbol": {
+                      "const": "ETHUSDT"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "https://btcwar.net/api/market-observation/v1/ETHUSDT.json"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "market": {
+                  "properties": {
+                    "symbol": {
+                      "const": "BNBUSDT"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "https://btcwar.net/api/market-observation/v1/BNBUSDT.json"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "market": {
+                  "properties": {
+                    "symbol": {
+                      "const": "SOLUSDT"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "https://btcwar.net/api/market-observation/v1/SOLUSDT.json"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "market": {
+                  "properties": {
+                    "symbol": {
+                      "const": "XRPUSDT"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "https://btcwar.net/api/market-observation/v1/XRPUSDT.json"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "market": {
+                  "properties": {
+                    "symbol": {
+                      "const": "TRXUSDT"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "https://btcwar.net/api/market-observation/v1/TRXUSDT.json"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "market": {
+                  "properties": {
+                    "symbol": {
+                      "const": "DOGEUSDT"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "https://btcwar.net/api/market-observation/v1/DOGEUSDT.json"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "market": {
+                  "properties": {
+                    "symbol": {
+                      "const": "ZECUSDT"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "https://btcwar.net/api/market-observation/v1/ZECUSDT.json"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "market": {
+                  "properties": {
+                    "symbol": {
+                      "const": "ADAUSDT"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "https://btcwar.net/api/market-observation/v1/ADAUSDT.json"
+                }
+              }
+            }
+          }
+        ],
+        "x-source-schema": "https://btcwar.net/api/market-observation/v1.schema.json"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Binance Spot rolling 24-hour ticker source methodology",
+    "url": "https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints"
+  }
+}

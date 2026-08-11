@@ -1,0 +1,4 @@
+Contact: mailto:binbinwangt@gmail.com
+Expires: 2027-01-19T00:00:00Z
+Preferred-Languages: en
+Canonical: https://btcwar.net/.well-known/security.txt

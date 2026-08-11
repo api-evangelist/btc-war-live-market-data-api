@@ -1,0 +1,54 @@
+generated: '2026-08-11'
+method: derived
+source: mcp/btc-war-live-market-data-api-tools-list.json + openapi/btc-war-live-market-data-api-market-data-openapi.yml
+surfaces:
+  openapi:
+    url: openapi/btc-war-live-market-data-api-market-data-openapi.yml
+    remote: https://btcwar.net/api/openapi.json
+    gated: false
+    operations: 14
+  mcp:
+    url: https://btcwar.net/mcp
+    gated: false
+    note: tools/list answered anonymously, so every tool below carries its real published inputSchema.
+  graphql:
+    present: false
+crosswalk:
+  - tool: get_live_crypto_prices
+    category: market-data
+    rest:
+      - getLiveMarketSnapshot
+      - getLiveMarketObservation
+    binding: rest
+    confidence: high
+    note: >-
+      With no symbols argument the tool returns the complete nine-market snapshot (getLiveMarketSnapshot); with a symbols
+      array it returns the same per-market objects the single-symbol observation operation serves
+      (getLiveMarketObservation, one call per symbol). The tool output envelope (schemaVersion, source, generatedAt,
+      markets[], canonicalPage, liveEvidence, limitations) matches the MarketSnapshot schema, and liveEvidence enumerates
+      exactly the ten REST evidence URLs those two operations serve.
+mcp_only: []
+rest_only:
+  - operations: [getLiveMarketSnapshotJsonLd, getLiveMarketObservationJsonLd]
+    reason: JSON-LD alternate representations; MCP returns the JSON projection only.
+  - operations: [getMarketSnapshotSchema, getMarketObservationSchema]
+    reason: JSON Schema validation contracts; the MCP tool ships its outputSchema inline instead.
+  - operations: [getLiveMarketDataStatus]
+    reason: Availability and freshness signal; no MCP tool exposes it.
+  - operations:
+      - headLiveMarketSnapshot
+      - headLiveMarketSnapshotJsonLd
+      - headLiveMarketObservation
+      - headLiveMarketObservationJsonLd
+      - headMarketSnapshotSchema
+      - headMarketObservationSchema
+      - headLiveMarketDataStatus
+    reason: HEAD validator-only twins of the GET operations; not tool-shaped.
+coverage:
+  tools_named: 1
+  tools_bound: 1
+  mcp_only: 0
+  rest_operations_total: 14
+  rest_operations_with_a_tool: 2
+  rest_get_operations_total: 7
+  rest_get_operations_with_a_tool: 2

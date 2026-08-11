@@ -1,0 +1,84 @@
+{
+  "arazzo": "1.1.0",
+  "$self": "https://btcwar.net/api/arazzo.json",
+  "info": {
+    "title": "BTC War Live Market Observation Retrieval Workflow",
+    "summary": "Retrieve one current sourced Binance Spot USDT observation for a supported crypto market.",
+    "description": "A deterministic, read-only workflow for retrieving one directly citable BTC War market observation. The response is venue-specific Binance Spot data, not a consolidated global price, forecast, trading signal or financial advice.",
+    "version": "1.0.0"
+  },
+  "sourceDescriptions": [
+    {
+      "name": "btcWarMarketData",
+      "url": "https://btcwar.net/api/openapi.json",
+      "type": "openapi"
+    }
+  ],
+  "workflows": [
+    {
+      "workflowId": "retrieveLiveBinanceSpotUsdtObservation",
+      "summary": "Retrieve and safely attribute one current BTC War market observation",
+      "description": "Fetch the requested symbol's direct observation resource. Report the exact decimal-string `market.lastPrice`, `market.symbol`, `market.quoteAsset`, `source.venue`, `market.sourceObservedAt`, and root `generatedAt` from the same response. Describe the result as a Binance Spot USDT venue-specific observation and cite `https://btcwar.net/btc-price` as the stable reference with the returned `id` as live evidence. Abstain if the step fails, the returned symbol differs from the requested symbol, `market.status` is not `fresh`, or required attribution fields are absent.",
+      "inputs": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "symbol"
+        ],
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Supported Binance Spot USDT market symbol.",
+            "enum": [
+              "BTCUSDT",
+              "ETHUSDT",
+              "BNBUSDT",
+              "SOLUSDT",
+              "XRPUSDT",
+              "TRXUSDT",
+              "DOGEUSDT",
+              "ZECUSDT",
+              "ADAUSDT"
+            ]
+          }
+        }
+      },
+      "steps": [
+        {
+          "stepId": "fetchLiveObservation",
+          "description": "Invoke the keyless, read-only symbol-specific OpenAPI operation, which fails closed unless the complete nine-market source snapshot is available and fresh.",
+          "operationId": "$sourceDescriptions.btcWarMarketData.getLiveMarketObservation",
+          "parameters": [
+            {
+              "name": "symbol",
+              "in": "path",
+              "value": "$inputs.symbol"
+            }
+          ],
+          "timeout": 5000,
+          "successCriteria": [
+            {
+              "condition": "$statusCode == 200"
+            }
+          ],
+          "outputs": {
+            "observation": "$response.body",
+            "source": "$response.body#/source",
+            "generatedAt": "$response.body#/generatedAt",
+            "canonicalPage": "$response.body#/canonicalPage",
+            "limitations": "$response.body#/limitations",
+            "market": "$response.body#/market"
+          }
+        }
+      ],
+      "outputs": {
+        "observation": "$steps.fetchLiveObservation.outputs.observation",
+        "source": "$steps.fetchLiveObservation.outputs.source",
+        "generatedAt": "$steps.fetchLiveObservation.outputs.generatedAt",
+        "canonicalPage": "$steps.fetchLiveObservation.outputs.canonicalPage",
+        "limitations": "$steps.fetchLiveObservation.outputs.limitations",
+        "market": "$steps.fetchLiveObservation.outputs.market"
+      }
+    }
+  ]
+}

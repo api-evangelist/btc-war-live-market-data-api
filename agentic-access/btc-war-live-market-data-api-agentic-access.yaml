@@ -1,0 +1,140 @@
+generated: "2026-07-19"
+method: reviewed
+source: "https://btcwar.net/api/openapi.json"
+description: "Agent execution contract for the BTC War public market data API. Every operation is public, read-only, non-acting and has no external side effect."
+summary:
+  operations: 14
+  by_action_class:
+    connected: 14
+    acting: 0
+  by_consequence:
+    read: 14
+    write: 0
+  human_in_the_loop_required: 0
+operations:
+  - path: /api/market-snapshot/v1.json
+    method: get
+    operationId: getLiveMarketSnapshot
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-snapshot/v1.json
+    method: head
+    operationId: headLiveMarketSnapshot
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-snapshot/v1.jsonld
+    method: get
+    operationId: getLiveMarketSnapshotJsonLd
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-snapshot/v1.jsonld
+    method: head
+    operationId: headLiveMarketSnapshotJsonLd
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-observation/v1/{symbol}.json
+    method: get
+    operationId: getLiveMarketObservation
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-observation/v1/{symbol}.json
+    method: head
+    operationId: headLiveMarketObservation
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-observation/v1/{symbol}.jsonld
+    method: get
+    operationId: getLiveMarketObservationJsonLd
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-observation/v1/{symbol}.jsonld
+    method: head
+    operationId: headLiveMarketObservationJsonLd
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-observation/v1.schema.json
+    method: get
+    operationId: getMarketObservationSchema
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-observation/v1.schema.json
+    method: head
+    operationId: headMarketObservationSchema
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-snapshot/v1.schema.json
+    method: get
+    operationId: getMarketSnapshotSchema
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/market-snapshot/v1.schema.json
+    method: head
+    operationId: headMarketSnapshotSchema
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/status/v1.json
+    method: get
+    operationId: getLiveMarketDataStatus
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none
+  - path: /api/status/v1.json
+    method: head
+    operationId: headLiveMarketDataStatus
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      authentication: none
+      human-in-the-loop: not-required
+      audit: none

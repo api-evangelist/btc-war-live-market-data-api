@@ -1,0 +1,27 @@
+generated: '2026-08-11'
+method: searched
+source: https://btcwar.net/api/openapi.json + https://btcwar.net/llms-full.txt + observed live response headers
+limit_count: 0
+limits: []
+response_headers: []
+status_on_exhaustion: null
+note: >-
+  No rate limits are published anywhere on the surface — not in the OpenAPI, not in llms.txt or llms-full.txt, not on
+  /btc-price or /how-it-works — and no X-RateLimit-*, RateLimit-* or Retry-After header appeared on any observed 200 or
+  404 response. The API is keyless, so there is no per-caller identity a documented quota could attach to. What the
+  provider does publish instead is a caching contract that keeps callers off the origin: cache-control public max-age=15,
+  cloudflare-cdn-cache-control public max-age=30, ETag + Last-Modified validators and documented 304 handling, all served
+  behind Cloudflare. An unpublished edge protection layer may still throttle abusive callers; an agent cannot know its
+  budget in advance.
+observed:
+  fetched: '2026-08-11'
+  evidence:
+    - url: https://btcwar.net/api/market-snapshot/v1.json
+      http_status: 200
+      rate_limit_headers: none
+    - url: https://btcwar.net/api/market-observation/v1/FOOUSDT.json
+      http_status: 404
+      rate_limit_headers: none
+recommendation: >-
+  Honour the 15-second cache-control window with conditional requests rather than polling; the underlying data cannot
+  change faster than the edge cache anyway.

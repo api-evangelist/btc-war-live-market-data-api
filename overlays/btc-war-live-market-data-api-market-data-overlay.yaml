@@ -1,0 +1,47 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for BTC War Live Market Data API
+  version: 1.0.0
+x-provenance:
+  generated: '2026-08-11'
+  method: generated
+  source: openapi/btc-war-live-market-data-api-market-data-openapi.yml
+  note: >-
+    Additive only. The harvested contract is already unusually complete — every operation carries an operationId, summary,
+    description, tags, documented 4xx/5xx responses and externalValue examples — so this overlay records API Evangelist
+    cross-references rather than repairing gaps.
+extends: openapi/btc-war-live-market-data-api-market-data-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: btc-war-live-market-data-api
+      x-apievangelist-profile: https://btc-war-live-market-data-api.apievangelist.com/apis.yml
+      x-apievangelist-reviewed: '2026-08-11'
+      x-apievangelist-artifacts:
+        arazzo: arazzo/btc-war-live-market-data-api-arazzo.json
+        agent_skill: skills/btc-war-live-market-data-api-live-crypto-price.md
+        agentic_access: agentic-access/btc-war-live-market-data-api-agentic-access.yaml
+        mcp: mcp/btc-war-live-market-data-api-mcp.yml
+        tool_crosswalk: mcp/btc-war-live-market-data-api-tool-crosswalk.yml
+        errors: errors/btc-war-live-market-data-api-problem-types.yml
+        conventions: conventions/btc-war-live-market-data-api-conventions.yml
+        data_model: data-model/btc-war-live-market-data-api-data-model.yml
+        vocabulary: vocabulary/btc-war-live-market-data-api-vocabulary.yaml
+        well_known: well-known/btc-war-live-market-data-api-well-known.yml
+  - target: $.info
+    update:
+      x-apievangelist-authentication: none
+      x-apievangelist-pricing: free
+  - target: $.paths['/api/market-snapshot/v1.json'].get
+    update:
+      x-apievangelist-mcp-tool: get_live_crypto_prices
+      x-apievangelist-note: Backs the MCP tool when the symbols argument is omitted.
+  - target: $.paths['/api/market-observation/v1/{symbol}.json'].get
+    update:
+      x-apievangelist-mcp-tool: get_live_crypto_prices
+      x-apievangelist-arazzo-workflow: retrieveLiveBinanceSpotUsdtObservation
+      x-apievangelist-note: Backs the MCP tool when a symbols array is supplied, and is the single step of the published Arazzo workflow.
+  - target: $.paths['/api/status/v1.json'].get
+    update:
+      x-apievangelist-role: status
+      x-apievangelist-note: Machine-readable availability and freshness signal; recorded as the provider's status surface in lifecycle/.

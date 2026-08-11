@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "id": "https://btcwar.net/api/error-catalog.json",
+  "contract": "https://btcwar.net/api/openapi.json",
+  "description": "Stable HTTP and response-body signals exposed by the BTC War public read-only market data API. Codes in this catalog are normalized identifiers for agents; match the documented HTTP status and body fields returned by the API.",
+  "errors": [
+    {
+      "code": "unsupported_market_symbol",
+      "match": {
+        "httpStatus": 404,
+        "contentType": "application/problem+json",
+        "body": {
+          "error": "Unsupported market symbol"
+        }
+      },
+      "retryable": false,
+      "agentAction": "Choose one symbol from supportedSymbols; do not retry the same unsupported symbol."
+    },
+    {
+      "code": "live_market_snapshot_unavailable",
+      "match": {
+        "httpStatus": 502,
+        "contentType": "application/json",
+        "body": {
+          "error": "Live market snapshot unavailable"
+        }
+      },
+      "retryable": true,
+      "agentAction": "Abstain from reporting a price. Retry later with backoff and revalidate the complete response."
+    },
+    {
+      "code": "live_market_observation_unavailable",
+      "match": {
+        "httpStatus": 502,
+        "contentType": "application/problem+json",
+        "body": {
+          "error": "Live market observation unavailable"
+        }
+      },
+      "retryable": true,
+      "agentAction": "Abstain from reporting a price. Retry later with backoff; never reuse an earlier observation as current."
+    },
+    {
+      "code": "live_market_jsonld_feed_unavailable",
+      "match": {
+        "httpStatus": 502,
+        "contentType": "application/problem+json",
+        "body": {
+          "error": "Live market JSON-LD feed unavailable"
+        }
+      },
+      "retryable": true,
+      "agentAction": "Abstain from publishing semantic price data and retry later with backoff."
+    },
+    {
+      "code": "live_market_jsonld_observation_unavailable",
+      "match": {
+        "httpStatus": 502,
+        "contentType": "application/problem+json",
+        "body": {
+          "error": "Live market JSON-LD observation unavailable"
+        }
+      },
+      "retryable": true,
+      "agentAction": "Abstain from reporting the semantic observation and retry later with backoff."
+    },
+    {
+      "code": "market_status_unavailable",
+      "match": {
+        "httpStatus": 503,
+        "contentType": "application/json",
+        "body": {
+          "service": {
+            "status": "unavailable"
+          }
+        }
+      },
+      "retryable": true,
+      "agentAction": "Treat the live market service as unavailable, abstain from current-price claims and retry later with backoff."
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+generated: '2026-08-11'
+method: searched
+source: https://btcwar.net/api/openapi.json + observed live response headers on https://btcwar.net/api/market-snapshot/v1.json
+auth:
+  style: none
+  detail: Keyless public read-only API; no account, key, registration or payment. See authentication/btc-war-live-market-data-api-authentication.yml.
+  cors: "access-control-allow-origin: *"
+methods:
+  allowed: [GET, HEAD]
+  enforcement: '405 with "Allow: GET, HEAD" is a documented response on every path.'
+idempotency:
+  supported: true
+  mechanism: http-safe-methods
+  key_header: null
+  detail: >-
+    Every one of the 14 operations is a GET or HEAD with no request body and no server-side state change, so all of them
+    are safe and idempotent under RFC 9110 and any request may be retried without an idempotency key. The provider states
+    this machine-readably in three places: the OpenAPI documents only GET/HEAD and returns 405 with Allow: GET, HEAD for
+    anything else; the published agentic-access contract classifies all 14 operations as action-class connected /
+    consequence read / audit none with 0 requiring a human in the loop; and the MCP tool carries annotations
+    readOnlyHint: true, destructiveHint: false, idempotentHint: true.
+  retry_rule: >-
+    Retries are safe but must be revalidated, not replayed from cache — the error catalog marks the 502/503 conditions
+    retryable with backoff and instructs agents to abstain rather than reuse an earlier observation as current.
+  caveat: There is no write surface, so no idempotency-key mechanism exists or is needed.
+caching:
+  cache_control: public, max-age=15
+  cdn_cache_control: public, max-age=30
+  max_age_seconds_field: 30
+  validators: [ETag, Last-Modified]
+  conditional_requests:
+    request_headers: [If-None-Match, If-Modified-Since]
+    response: 304 documented on every GET
+    declared_as: components.parameters.IfNoneMatch and components.parameters.IfModifiedSince
+  integrity: "Content-Digest: sha-256=:...: (RFC 9530), exposed via access-control-expose-headers."
+  errors_are_uncacheable: "cache-control: no-store on 404/problem responses."
+pagination:
+  style: none
+  detail: Collection responses are fixed at exactly nine markets (minItems 9, maxItems 9); there is nothing to paginate.
+filtering:
+  style: path-selection
+  detail: A single market is selected by path segment, /api/market-observation/v1/{symbol}.json, with symbol constrained by enum.
+content_negotiation:
+  representations:
+    - suffix: .json
+      media_type: application/json
+    - suffix: .jsonld
+      media_type: application/ld+json
+      note: Schema.org typed alternate of the same validated observation; an alternate representation, not a second price source.
+  linking: >-
+    Alternates, canonical, cite-as, describedby, service-desc, api-catalog and license are all advertised in an RFC 8288
+    Link header on every response.
+versioning:
+  in_uri: v1
+  in_body: schemaVersion "1.0"
+  see: lifecycle/btc-war-live-market-data-api-lifecycle.yml
+error_envelope:
+  media_type: application/problem+json
+  shape: '{error, supportedSymbols}'
+  rfc9457_member_set: false
+  see: errors/btc-war-live-market-data-api-problem-types.yml
+rate_limit_signalling:
+  headers_observed: []
+  detail: No X-RateLimit-*, RateLimit-* or Retry-After headers were observed and no limits are published. See rate-limits/btc-war-live-market-data-api-rate-limits.yml.
+tracing:
+  request_id_header: null
+  detail: No request-id or correlation header is emitted; the ETag and Content-Digest are the only per-representation identifiers.
+attribution_contract:
+  required_fields: [market.symbol, market.lastPrice, market.quoteAsset, source.venue, market.sourceObservedAt, generatedAt]
+  citation: https://btcwar.net/btc-price
+  detail: >-
+    The provider publishes an explicit consumption contract (info.x-retrieval, the agent skill, the Arazzo workflow): report
+    the venue, the USDT quote asset and both timestamps, never relabel USDT as USD, and abstain when market.status is not
+    "fresh".
+freshness_contract:
+  fail_closed: true
+  detail: A single-market observation is served only when the complete validated nine-market snapshot is fresh; otherwise the request 502s.

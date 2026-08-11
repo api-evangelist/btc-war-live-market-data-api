@@ -1,0 +1,45 @@
+generated: '2026-08-11'
+method: searched
+source: https://btcwar.net/api/openapi.json + https://btcwar.net/api/status/v1.json + https://github.com/VibeWhip/btc-war/releases
+versioning:
+  scheme: uri-path
+  current: v1
+  spec_version: 1.0.0
+  note: >-
+    Every resource path pins the major version in the URI (/api/market-snapshot/v1.json,
+    /api/market-observation/v1/{symbol}.json, /api/status/v1.json). Response bodies additionally carry a schemaVersion
+    field ("1.0"), and the schemas pin it with a const.
+  docs: https://btcwar.net/api/openapi.json
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  note: No deprecation or Sunset policy is published, and no RFC 8594 Sunset/Deprecation headers were observed on live responses.
+sla:
+  url: null
+  uptime_target: null
+  service_class: best-effort-public
+  note: >-
+    The status document self-describes as "a live best-effort availability and freshness signal, not a contractual uptime
+    guarantee or SLA."
+status_page: https://btcwar.net/api/status/v1.json
+status_page_kind: machine-readable-json
+status_observed:
+  fetched: '2026-08-11'
+  http_status: 200
+  service_status: operational
+  source_status: reachable
+  data_status: fresh
+  fresh_markets: 9
+  total_markets: 9
+  max_source_lag_seconds: 1
+freshness_contract:
+  cache_control: public, max-age=15
+  cdn_cache_control: public, max-age=30
+  note: Responses are cached at most 30 seconds at the edge; stale source data fails closed rather than being served.
+releases:
+  - version: v1.0.0
+    date: '2026-07-12'
+    url: https://github.com/VibeWhip/btc-war/releases/tag/v1.0.0
+    title: BTC War v1.0.0 — Live BTC Price & Order Flow Web Launch
+deprecated_operations: []

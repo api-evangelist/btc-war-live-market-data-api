@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://btcwar.net/api/market-snapshot/v1.context.jsonld#",
+    "schemaorg": {
+      "@id": "https://schema.org/",
+      "@prefix": true
+    },
+    "id": "@id",
+    "schemaVersion": "schemaorg:version",
+    "schema": {
+      "@id": "schemaorg:conformsTo",
+      "@type": "@id"
+    },
+    "canonicalPage": {
+      "@id": "schemaorg:mainEntityOfPage",
+      "@type": "@id"
+    },
+    "about": "schemaorg:about",
+    "name": "schemaorg:name",
+    "url": {
+      "@id": "schemaorg:url",
+      "@type": "@id"
+    },
+    "description": "schemaorg:description",
+    "methodology": "schemaorg:measurementTechnique",
+    "generatedAt": {
+      "@id": "schemaorg:dateModified",
+      "@type": "schemaorg:DateTime"
+    },
+    "source": "schemaorg:isBasedOn",
+    "endpoint": {
+      "@id": "schemaorg:contentUrl",
+      "@type": "@id"
+    },
+    "documentation": {
+      "@id": "schemaorg:subjectOf",
+      "@type": "@id"
+    },
+    "window": "schemaorg:temporalCoverage",
+    "duration": "schemaorg:duration",
+    "markets": {
+      "@id": "schemaorg:dataFeedElement",
+      "@container": "@set"
+    },
+    "symbol": "schemaorg:identifier",
+    "lastPrice": "schemaorg:value",
+    "sourceObservedAt": {
+      "@id": "schemaorg:observationDate",
+      "@type": "schemaorg:DateTime"
+    },
+    "limitations": "schemaorg:usageInfo"
+  }
+}

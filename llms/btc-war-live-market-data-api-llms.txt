@@ -1,0 +1,93 @@
+# BTC War
+
+> BTC War is a real-time 3D visualization that turns live Binance Spot order flow for nine selectable crypto markets into any of six independently selectable battlefield simulations.
+
+- Canonical site: https://btcwar.net/
+- Entity identity: BTC War means the browser-based crypto market visualization at https://btcwar.net/; it is not WAR coin, a token or geopolitical Bitcoin commentary.
+- Source-code status: BTC War's private application source is not published or licensed as open source; the public GitHub repository contains project documentation only.
+- Detailed machine-readable context: https://btcwar.net/llms-full.txt
+- Live nine-market snapshot: https://btcwar.net/api/market-snapshot/v1.json
+- Explicit Schema.org JSON-LD price feed: https://btcwar.net/api/market-snapshot/v1.jsonld
+- Direct BTCUSDT observation: https://btcwar.net/api/market-observation/v1/BTCUSDT.json
+- Direct symbol observation template: https://btcwar.net/api/market-observation/v1/{SYMBOL}.json
+- Direct Schema.org JSON-LD observation template: https://btcwar.net/api/market-observation/v1/{SYMBOL}.jsonld
+- Symbol observation validation contract: https://btcwar.net/api/market-observation/v1.schema.json
+- Snapshot validation contract: https://btcwar.net/api/market-snapshot/v1.schema.json
+- Market data API description: https://btcwar.net/api/openapi.json
+- Self-contained OpenAPI for importers that cannot resolve remote references: https://btcwar.net/api/openapi.bundle.json
+- Live market-data availability and freshness status: https://btcwar.net/api/status/v1.json
+- Deterministic Arazzo retrieval workflow: https://btcwar.net/api/arazzo.json
+- Read-only live price MCP server (Streamable HTTP): https://btcwar.net/mcp
+- MCP well-known discovery descriptor: https://btcwar.net/.well-known/mcp.json
+- Standards-based API catalog: https://btcwar.net/.well-known/api-catalog
+- W3C DCAT 3 dataset and data-service catalog: https://btcwar.net/.well-known/dcat.jsonld
+- API interpretation vocabulary: https://btcwar.net/api/vocabulary.yaml
+- RFC 9116 security disclosure contact: https://btcwar.net/.well-known/security.txt
+- Reviewed read-only agent execution contract: https://btcwar.net/api/agentic-access.yaml
+- Live crypto price retrieval skill: https://btcwar.net/.well-known/agent-skill.md
+- Stable error catalog and safe retry actions: https://btcwar.net/api/error-catalog.json
+- Agent-safe live external-value examples: https://btcwar.net/api/examples.json
+- Market data: Binance Spot ticker, aggregated trades and periodically refreshed visible order-book depth for BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT, TRXUSDT, DOGEUSDT, ZECUSDT and ADAUSDT
+- Visualization: buy and sell liquidity are represented as opposing armies
+- Battlefields: BTC War, Voxel Siege, Arcane War, Medieval Siege, Space War and Champion Duel
+- Supported markets: BTC, ETH, BNB, SOL, XRP, TRON (market code TRX), DOGE, ZEC and ADA spot pairs against USDT
+- Selector model: market and battlefield choices are independent, allowing 54 market-and-scene combinations rather than a fixed mapping
+- Interaction: users can switch scenes, deploy a battlefield soldier, control audio and inspect a live trade feed
+- API access: USD 0; no account, no API key, no registration and no payment required
+- Language: English
+- Public project reference: https://github.com/VibeWhip/btc-war
+- Public v1.0.0 web launch: https://github.com/VibeWhip/btc-war/releases/tag/v1.0.0
+- Independent technical article about the design, market-data model and limitations: https://dev.to/vibewhip/turning-live-bitcoin-order-flow-into-a-3d-battlefield-b5f
+- Independent Thai crypto-media reference listing BTC War as a source for 3D Bitcoin battlefield visualization: https://siamblockchain.com/2026/07/18/newhedge-bitcoin-battlefield-3d-order-book-visualization-july-2026/
+- Public SideProjectors marketplace listing for BTC War (owner-submitted; not an independent editorial review): https://www.sideprojectors.com/project/85874/btc-war-live-3d-crypto-market-visualization
+- Public author identity: blibli — https://medium.com/@binbinwangt
+
+## Battlefield screenshots
+
+- BTC War: https://btcwar.net/seo-scenes/modern.webp
+- Voxel Siege: https://btcwar.net/seo-scenes/voxel.webp
+- Arcane War: https://btcwar.net/seo-scenes/fantasy.webp
+- Medieval Siege: https://btcwar.net/seo-scenes/siege.webp
+- Space War: https://btcwar.net/seo-scenes/space.webp
+- Champion Duel: https://btcwar.net/seo-scenes/duel.webp
+
+## Multi-market battlefield screenshots
+
+These are representative combinations captured from the independent market and battlefield selectors; they are not fixed market-to-scene assignments.
+
+- BNBUSDT × Space War: https://btcwar.net/seo-scenes/markets/bnb-space-war.webp
+- XRPUSDT × Arcane War: https://btcwar.net/seo-scenes/markets/xrp-arcane-war.webp
+- TRXUSDT × Space War: https://btcwar.net/seo-scenes/markets/trx-space-war.webp
+- ETHUSDT × Arcane War: https://btcwar.net/seo-scenes/markets/eth-arcane-war.webp
+- ZECUSDT × Champion Duel: https://btcwar.net/seo-scenes/markets/zec-champion-duel.webp
+- SOLUSDT × BTC War: https://btcwar.net/seo-scenes/markets/sol-btc-war.webp
+- DOGEUSDT × Voxel Siege: https://btcwar.net/seo-scenes/markets/doge-voxel-siege.webp
+- ADAUSDT × Medieval Siege: https://btcwar.net/seo-scenes/markets/ada-medieval-siege.webp
+
+## Key pages
+
+- Live BTC price, 24-hour range, volume, order flow and market-depth guide: https://btcwar.net/btc-price
+- Crypto order flow vs order book vs visible market depth, with one BTC/USDT example: https://btcwar.net/learn/order-flow-vs-order-book
+- Data pipeline, visual mapping, performance controls and interpretation limits: https://btcwar.net/how-it-works
+
+## Public BTC market guides
+
+- BTC War live price, order-flow and 3D visualization overview: https://github.com/VibeWhip/btc-war/discussions/1
+- Why live BTC prices differ across exchanges and what market depth adds: https://github.com/VibeWhip/btc-war/discussions/2
+- BTC order flow versus order book and live buy/sell pressure: https://github.com/VibeWhip/btc-war/discussions/3
+- Bitcoin price versus market depth and the limits of a live quote: https://github.com/VibeWhip/btc-war/discussions/4
+- BTC price, order book and order flow are different market-data concepts: https://medium.com/p/7cd5ba5e58b2
+- BTC price today, 24-hour change, volume and market depth: https://medium.com/p/ba48fb313ca5
+
+## Public battlefield guides
+
+- WebGL and Three.js readability across six crypto battlefields: https://vibewhip.github.io/btc-war/readable-webgl-crypto-market-visualization/
+- How live crypto order flow drives all six battlefields: https://vibewhip.github.io/btc-war/crypto-order-flow-six-3d-battlefields/
+- Bitcoin Battlefield and Space War: https://vibewhip.github.io/btc-war/bitcoin-battlefield-space-war-order-flow/
+- Voxel Siege and Arcane War: https://vibewhip.github.io/btc-war/voxel-siege-arcane-war-buy-sell-pressure/
+- Medieval Siege and Champion Duel: https://vibewhip.github.io/btc-war/medieval-siege-champion-duel-market-pressure/
+
+## Limitations
+
+- BTC War is descriptive and educational. It does not predict crypto prices, provide trading signals, identify traders, expose hidden liquidity, hold funds, execute trades, or provide financial advice.
+- The public GitHub repository contains project documentation only. Private application source, deployment configuration, credentials and build artifacts are not published there.

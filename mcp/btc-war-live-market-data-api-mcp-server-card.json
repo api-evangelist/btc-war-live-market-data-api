@@ -1,0 +1,129 @@
+{
+  "serverInfo": {
+    "name": "btc-war-market-data",
+    "title": "BTC War Live Market Data",
+    "version": "1.0.0",
+    "description": "Read-only, sourced and timestamped Binance Spot USDT market observations.",
+    "websiteUrl": "https://btcwar.net/"
+  },
+  "authentication": {
+    "required": false,
+    "schemes": []
+  },
+  "tools": [
+    {
+      "name": "get_live_crypto_prices",
+      "title": "Get Live Binance Spot Crypto Prices",
+      "description": "Retrieve sourced, timestamped BTC War observations for one or more supported Binance Spot USDT markets. Values are venue-specific decimal strings, not consolidated global prices, forecasts, trading signals or financial advice.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "symbols": {
+            "type": "array",
+            "description": "Optional Binance Spot symbols. Omit to retrieve all nine supported USDT markets.",
+            "minItems": 1,
+            "maxItems": 9,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "BTCUSDT",
+                "ETHUSDT",
+                "BNBUSDT",
+                "SOLUSDT",
+                "XRPUSDT",
+                "TRXUSDT",
+                "DOGEUSDT",
+                "ZECUSDT",
+                "ADAUSDT"
+              ]
+            }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "source",
+          "generatedAt",
+          "markets",
+          "canonicalPage",
+          "liveEvidence",
+          "limitations"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0"
+          },
+          "source": {
+            "type": "object",
+            "required": [
+              "name",
+              "venue",
+              "marketType",
+              "endpoint",
+              "documentation"
+            ],
+            "additionalProperties": true
+          },
+          "generatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "markets": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "symbol",
+                "baseAsset",
+                "quoteAsset",
+                "lastPrice",
+                "sourceObservedAt",
+                "status"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "canonicalPage": {
+            "const": "https://btcwar.net/btc-price"
+          },
+          "liveEvidence": {
+            "type": "string",
+            "enum": [
+              "https://btcwar.net/api/market-snapshot/v1.json",
+              "https://btcwar.net/api/market-observation/v1/BTCUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/ETHUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/BNBUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/SOLUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/XRPUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/TRXUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/DOGEUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/ZECUSDT.json",
+              "https://btcwar.net/api/market-observation/v1/ADAUSDT.json"
+            ]
+          },
+          "limitations": {
+            "type": "string"
+          }
+        }
+      },
+      "annotations": {
+        "title": "Read live Binance Spot crypto prices",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ],
+  "resources": [],
+  "prompts": []
+}

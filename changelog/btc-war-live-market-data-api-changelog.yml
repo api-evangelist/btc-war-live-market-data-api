@@ -1,0 +1,27 @@
+generated: '2026-08-11'
+method: searched
+source: https://github.com/VibeWhip/btc-war/releases
+scheme: github-releases
+current_version: v1.0.0
+api_version: 1.0.0
+dated_changelog_page: false
+note: >-
+  There is no dated API changelog page — https://btcwar.net/changelog returns 404. The only dated, versioned record the
+  provider publishes is the GitHub release feed on the public documentation repository, which covers the product launch
+  rather than contract changes. The API itself pins its version in the URI (v1) and in every response body
+  (schemaVersion "1.0"), so a breaking change would be observable as a new path, but no history of changes is published.
+entries:
+  - version: v1.0.0
+    date: '2026-07-12'
+    url: https://github.com/VibeWhip/btc-war/releases/tag/v1.0.0
+    title: BTC War v1.0.0 — Live BTC Price & Order Flow Web Launch
+    breaking: []
+    additions:
+      - Public web launch of the live BTC price and order-flow visualization at https://btcwar.net/
+    highlights:
+      - First and so far only tagged release; the repository was last pushed 2026-07-14.
+evidence:
+  - url: https://api.github.com/repos/VibeWhip/btc-war/releases
+    status: 200
+  - url: https://btcwar.net/changelog
+    status: 404

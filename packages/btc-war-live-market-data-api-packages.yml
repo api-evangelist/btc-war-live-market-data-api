@@ -1,0 +1,18 @@
+generated: '2026-08-11'
+method: searched
+source: npm registry search, PyPI, GitHub repository VibeWhip/btc-war, https://btcwar.net/llms-full.txt
+package_count: 0
+packages: []
+note: >-
+  No first-party client library exists in any registry. An npm registry search for "btcwar" returns 0 results, the public
+  GitHub repository contains project documentation only (the application source is private and explicitly not licensed as
+  open source), and neither llms.txt, llms-full.txt nor the OpenAPI references an SDK, CLI or code sample package. This is
+  consistent with the design: the API is keyless, read-only and has seven GET resources, so plain HTTP or the hosted MCP
+  server is the intended integration path. No SDKs pointer is emitted because there is no SDK.
+evidence:
+  - url: https://registry.npmjs.org/-/v1/search?text=btcwar
+    status: 200
+    result: 0 packages
+  - url: https://api.github.com/repos/VibeWhip/btc-war
+    status: 200
+    result: documentation-only repository, no license, no package manifest published

@@ -1,0 +1,411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://btcwar.net/api/market-snapshot/v1.schema.json",
+  "title": "BTC War live market snapshot",
+  "description": "Validation contract for BTC War's sourced, timestamped Binance Spot snapshot of nine USDT markets.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "schema",
+    "id",
+    "canonicalPage",
+    "about",
+    "methodology",
+    "generatedAt",
+    "source",
+    "window",
+    "maxAgeSeconds",
+    "markets",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0",
+      "description": "Version of this BTC War market snapshot contract."
+    },
+    "schema": {
+      "const": "https://btcwar.net/api/market-snapshot/v1.schema.json",
+      "description": "Canonical JSON Schema URI that validates this response."
+    },
+    "id": {
+      "const": "https://btcwar.net/api/market-snapshot/v1.json",
+      "description": "Stable identifier and live URL of the ordinary JSON snapshot."
+    },
+    "canonicalPage": {
+      "const": "https://btcwar.net/btc-price",
+      "description": "Canonical human-readable page associated with this machine response."
+    },
+    "about": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Identity of the publisher, disambiguated from similarly named tokens or geopolitical commentary.",
+      "required": ["name", "url", "description"],
+      "properties": {
+        "name": {
+          "const": "BTC War",
+          "description": "Publisher and product name."
+        },
+        "url": {
+          "const": "https://btcwar.net/",
+          "description": "Official BTC War website."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Plain-language identity statement for entity disambiguation."
+        }
+      }
+    },
+    "methodology": {
+      "type": "string",
+      "minLength": 1,
+      "description": "How the venue observations, timestamps and rolling window were obtained."
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC time when BTC War generated this exact response."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Provenance for every market observation in this response.",
+      "required": [
+        "name",
+        "venue",
+        "marketType",
+        "endpoint",
+        "documentation",
+        "dataSource"
+      ],
+      "properties": {
+        "name": {
+          "const": "Binance Spot",
+          "description": "Human-readable upstream market name."
+        },
+        "venue": {
+          "const": "Binance",
+          "description": "Single trading venue represented by this snapshot."
+        },
+        "marketType": {
+          "const": "spot",
+          "description": "Market type; these values are spot-market observations, not derivatives."
+        },
+        "endpoint": {
+          "const": "https://data-api.binance.vision/api/v3/ticker/24hr",
+          "description": "Upstream Binance market-data endpoint used for the observations."
+        },
+        "documentation": {
+          "const": "https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints",
+          "description": "Official Binance documentation for the upstream rolling 24-hour ticker."
+        },
+        "dataSource": {
+          "const": "Memory",
+          "description": "Binance dataSource value for the upstream endpoint."
+        }
+      }
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Statistical time window used by Binance for change, high, low, volume and trade-count fields.",
+      "required": ["type", "duration"],
+      "properties": {
+        "type": {
+          "const": "rolling",
+          "description": "The 24-hour interval advances continuously rather than following a calendar day."
+        },
+        "duration": {
+          "const": "PT24H",
+          "description": "ISO 8601 duration for the rolling 24-hour interval."
+        }
+      }
+    },
+    "maxAgeSeconds": {
+      "const": 30,
+      "description": "Maximum intended edge age of a successful snapshot, in seconds."
+    },
+    "markets": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "description": "Exactly nine complete, fresh Binance Spot USDT market observations.",
+      "items": {
+        "$ref": "#/$defs/market"
+      }
+    },
+    "limitations": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Scope and interpretation limits, including single-venue coverage and non-advisory use."
+    }
+  },
+  "$defs": {
+    "decimal": {
+      "type": "string",
+      "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+      "description": "Signed decimal encoded as a string so clients can preserve source precision.",
+      "$comment": "Decimal values remain strings so clients can preserve the source precision."
+    },
+    "unsignedDecimal": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+      "description": "Non-negative decimal encoded as a string so clients can preserve source precision."
+    },
+    "market": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "One fresh, sourced Binance Spot rolling 24-hour ticker observation.",
+      "required": [
+        "symbol",
+        "baseAsset",
+        "quoteAsset",
+        "lastPrice",
+        "priceChange",
+        "priceChangePercent",
+        "highPrice",
+        "lowPrice",
+        "baseVolume",
+        "quoteVolume",
+        "tradeCount",
+        "windowOpenAt",
+        "sourceObservedAt",
+        "sourceLagSeconds",
+        "status"
+      ],
+      "properties": {
+        "symbol": {
+          "description": "Binance Spot symbol for this observation.",
+          "enum": [
+            "BTCUSDT",
+            "ETHUSDT",
+            "BNBUSDT",
+            "SOLUSDT",
+            "XRPUSDT",
+            "TRXUSDT",
+            "DOGEUSDT",
+            "ZECUSDT",
+            "ADAUSDT"
+          ]
+        },
+        "baseAsset": {
+          "description": "Base asset whose quantity is measured by baseVolume.",
+          "enum": ["BTC", "ETH", "BNB", "SOL", "XRP", "TRX", "DOGE", "ZEC", "ADA"]
+        },
+        "quoteAsset": {
+          "const": "USDT",
+          "description": "Quote asset used for prices, priceChange and quoteVolume."
+        },
+        "lastPrice": {
+          "$ref": "#/$defs/unsignedDecimal",
+          "description": "Most recent Binance Spot trade price, expressed as USDT per one base asset."
+        },
+        "priceChange": {
+          "$ref": "#/$defs/decimal",
+          "description": "Absolute price change over the rolling 24-hour window, expressed in USDT."
+        },
+        "priceChangePercent": {
+          "$ref": "#/$defs/decimal",
+          "description": "Relative price change over the rolling 24-hour window, expressed as a percentage; for example, 1.307 means 1.307%, not 0.01307%."
+        },
+        "highPrice": {
+          "$ref": "#/$defs/unsignedDecimal",
+          "description": "Highest trade price in the rolling 24-hour window, expressed in USDT."
+        },
+        "lowPrice": {
+          "$ref": "#/$defs/unsignedDecimal",
+          "description": "Lowest trade price in the rolling 24-hour window, expressed in USDT."
+        },
+        "baseVolume": {
+          "$ref": "#/$defs/unsignedDecimal",
+          "description": "Executed volume in units of the base asset during the rolling 24-hour window."
+        },
+        "quoteVolume": {
+          "$ref": "#/$defs/unsignedDecimal",
+          "description": "Executed notional volume in USDT during the rolling 24-hour window."
+        },
+        "tradeCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of Binance Spot trades counted in the rolling 24-hour window."
+        },
+        "windowOpenAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC opening time of the rolling 24-hour statistics window."
+        },
+        "sourceObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC Binance closeTime for this market observation."
+        },
+        "sourceLagSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 120,
+          "description": "Whole seconds between generatedAt and sourceObservedAt."
+        },
+        "status": {
+          "const": "fresh",
+          "description": "BTC War fails closed instead of publishing a stale market item."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "symbol": {
+                "const": "BTCUSDT"
+              }
+            },
+            "required": ["symbol"]
+          },
+          "then": {
+            "properties": {
+              "baseAsset": {
+                "const": "BTC"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "symbol": {
+                "const": "ETHUSDT"
+              }
+            },
+            "required": ["symbol"]
+          },
+          "then": {
+            "properties": {
+              "baseAsset": {
+                "const": "ETH"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "symbol": {
+                "const": "BNBUSDT"
+              }
+            },
+            "required": ["symbol"]
+          },
+          "then": {
+            "properties": {
+              "baseAsset": {
+                "const": "BNB"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "symbol": {
+                "const": "SOLUSDT"
+              }
+            },
+            "required": ["symbol"]
+          },
+          "then": {
+            "properties": {
+              "baseAsset": {
+                "const": "SOL"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "symbol": {
+                "const": "XRPUSDT"
+              }
+            },
+            "required": ["symbol"]
+          },
+          "then": {
+            "properties": {
+              "baseAsset": {
+                "const": "XRP"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "symbol": {
+                "const": "TRXUSDT"
+              }
+            },
+            "required": ["symbol"]
+          },
+          "then": {
+            "properties": {
+              "baseAsset": {
+                "const": "TRX"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "symbol": {
+                "const": "DOGEUSDT"
+              }
+            },
+            "required": ["symbol"]
+          },
+          "then": {
+            "properties": {
+              "baseAsset": {
+                "const": "DOGE"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "symbol": {
+                "const": "ZECUSDT"
+              }
+            },
+            "required": ["symbol"]
+          },
+          "then": {
+            "properties": {
+              "baseAsset": {
+                "const": "ZEC"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "symbol": {
+                "const": "ADAUSDT"
+              }
+            },
+            "required": ["symbol"]
+          },
+          "then": {
+            "properties": {
+              "baseAsset": {
+                "const": "ADA"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

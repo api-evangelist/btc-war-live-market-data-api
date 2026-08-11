@@ -1,0 +1,135 @@
+{
+  "@context": {
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dct": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://btcwar.net/.well-known/dcat.jsonld",
+      "@type": "dcat:Catalog",
+      "dct:title": "BTC War Live Market Data Catalog",
+      "dct:description": "A public catalog of read-only, sourced and timestamped Binance Spot price observations for nine USDT markets. BTC War is a browser-based market visualization, not a token, exchange, consolidated benchmark or financial adviser.",
+      "dct:identifier": "https://btcwar.net/.well-known/dcat.jsonld",
+      "dct:modified": {
+        "@value": "2026-07-19",
+        "@type": "xsd:date"
+      },
+      "dct:publisher": {
+        "@id": "https://btcwar.net/#organization",
+        "@type": "foaf:Organization",
+        "foaf:name": "BTC War",
+        "foaf:homepage": {
+          "@id": "https://btcwar.net/"
+        }
+      },
+      "dcat:landingPage": {
+        "@id": "https://btcwar.net/btc-price"
+      },
+      "dcat:dataset": {
+        "@id": "https://btcwar.net/btc-price#market-data"
+      },
+      "dcat:service": {
+        "@id": "https://btcwar.net/api/#market-data-service"
+      }
+    },
+    {
+      "@id": "https://btcwar.net/btc-price#market-data",
+      "@type": "dcat:Dataset",
+      "dct:title": "BTC War Live Binance Spot Market Snapshot",
+      "dct:description": "Venue-specific observations for BTC, ETH, BNB, SOL, XRP, TRX, DOGE, ZEC and ADA against USDT, including last price, rolling 24-hour change, range, volume, trade count, provenance and freshness timestamps.",
+      "dct:identifier": "https://btcwar.net/api/market-snapshot/v1.json",
+      "dct:publisher": {
+        "@id": "https://btcwar.net/#organization"
+      },
+      "dct:source": [
+        {
+          "@id": "https://data-api.binance.vision/api/v3/ticker/24hr"
+        },
+        {
+          "@id": "https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints"
+        }
+      ],
+      "dct:license": {
+        "@id": "https://www.binance.com/en/terms"
+      },
+      "dct:conformsTo": {
+        "@id": "https://btcwar.net/api/market-snapshot/v1.schema.json"
+      },
+      "dcat:landingPage": {
+        "@id": "https://btcwar.net/btc-price"
+      },
+      "dcat:keyword": [
+        "Bitcoin price",
+        "BTC price",
+        "crypto prices",
+        "Binance Spot",
+        "market data",
+        "JSON-LD"
+      ],
+      "dcat:distribution": [
+        {
+          "@id": "https://btcwar.net/api/market-snapshot/v1.json#distribution"
+        },
+        {
+          "@id": "https://btcwar.net/api/market-snapshot/v1.jsonld#distribution"
+        }
+      ]
+    },
+    {
+      "@id": "https://btcwar.net/api/market-snapshot/v1.json#distribution",
+      "@type": "dcat:Distribution",
+      "dct:title": "BTC War live market snapshot as JSON",
+      "dcat:downloadURL": {
+        "@id": "https://btcwar.net/api/market-snapshot/v1.json"
+      },
+      "dcat:mediaType": {
+        "@id": "https://www.iana.org/assignments/media-types/application/json"
+      },
+      "dcat:accessService": {
+        "@id": "https://btcwar.net/api/#market-data-service"
+      }
+    },
+    {
+      "@id": "https://btcwar.net/api/market-snapshot/v1.jsonld#distribution",
+      "@type": "dcat:Distribution",
+      "dct:title": "BTC War live market snapshot as JSON-LD",
+      "dcat:downloadURL": {
+        "@id": "https://btcwar.net/api/market-snapshot/v1.jsonld"
+      },
+      "dcat:mediaType": {
+        "@id": "https://www.iana.org/assignments/media-types/application/ld+json"
+      },
+      "dcat:accessService": {
+        "@id": "https://btcwar.net/api/#market-data-service"
+      }
+    },
+    {
+      "@id": "https://btcwar.net/api/#market-data-service",
+      "@type": "dcat:DataService",
+      "dct:title": "BTC War Live Market Data API",
+      "dct:description": "A keyless, read-only API serving validated market snapshots and symbol-specific observations without account creation or transaction capabilities.",
+      "dct:conformsTo": {
+        "@id": "https://spec.openapis.org/oas/v3.1.0"
+      },
+      "dcat:endpointURL": [
+        {
+          "@id": "https://btcwar.net/api/market-snapshot/v1.json"
+        },
+        {
+          "@id": "https://btcwar.net/api/market-observation/v1/"
+        }
+      ],
+      "dcat:endpointDescription": {
+        "@id": "https://btcwar.net/api/openapi.bundle.json"
+      },
+      "dcat:landingPage": {
+        "@id": "https://btcwar.net/btc-price"
+      },
+      "dcat:servesDataset": {
+        "@id": "https://btcwar.net/btc-price#market-data"
+      }
+    }
+  ]
+}

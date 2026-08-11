@@ -1,0 +1,73 @@
+generated: '2026-08-11'
+method: searched
+source: https://btcwar.net/api/error-catalog.json
+derived_from: openapi/_original/btc-war-live-market-data-api-openapi.json
+format: problem-json-media-type
+format_note: >-
+  Errors are served with the application/problem+json media type but the body is a bare {error, supportedSymbols}
+  object, not an RFC 9457 member set. Agents must match on HTTP status plus the `error` string, which is exactly what
+  the provider's own error catalog instructs.
+envelope:
+  fields: [error, supportedSymbols]
+  observed_example:
+    url: https://btcwar.net/api/market-observation/v1/FOOUSDT.json
+    http_status: 404
+    content_type: application/problem+json
+    body: '{"error":"Unsupported market symbol","supportedSymbols":["BTCUSDT", ... ,"ADAUSDT"]}'
+problems:
+  - code: unsupported_market_symbol
+    status: 404
+    title: Unsupported market symbol
+    content_type: application/problem+json
+    retryable: false
+    remediation: Choose one symbol from supportedSymbols; do not retry the same unsupported symbol.
+    source_operation: openapi/btc-war-live-market-data-api-market-data-openapi.yml#getLiveMarketObservation
+  - code: live_market_snapshot_unavailable
+    status: 502
+    title: Live market snapshot unavailable
+    content_type: application/json
+    retryable: true
+    remediation: Abstain from reporting a price. Retry later with backoff and revalidate the complete response.
+    source_operation: openapi/btc-war-live-market-data-api-market-data-openapi.yml#getLiveMarketSnapshot
+  - code: live_market_observation_unavailable
+    status: 502
+    title: Live market observation unavailable
+    content_type: application/problem+json
+    retryable: true
+    remediation: Abstain from reporting a price. Retry later with backoff; never reuse an earlier observation as current.
+    source_operation: openapi/btc-war-live-market-data-api-market-data-openapi.yml#getLiveMarketObservation
+  - code: live_market_jsonld_feed_unavailable
+    status: 502
+    title: Live market JSON-LD feed unavailable
+    content_type: application/problem+json
+    retryable: true
+    remediation: Abstain from publishing semantic price data and retry later with backoff.
+    source_operation: openapi/btc-war-live-market-data-api-market-data-openapi.yml#getLiveMarketSnapshotJsonLd
+  - code: live_market_jsonld_observation_unavailable
+    status: 502
+    title: Live market JSON-LD observation unavailable
+    content_type: application/problem+json
+    retryable: true
+    remediation: Abstain from reporting the semantic observation and retry later with backoff.
+    source_operation: openapi/btc-war-live-market-data-api-market-data-openapi.yml#getLiveMarketObservationJsonLd
+  - code: market_status_unavailable
+    status: 503
+    title: Market status unavailable
+    content_type: application/json
+    retryable: true
+    remediation: Treat the live market service as unavailable, abstain from current-price claims and retry later with backoff.
+    source_operation: openapi/btc-war-live-market-data-api-market-data-openapi.yml#getLiveMarketDataStatus
+  - code: method_not_allowed
+    status: 405
+    title: Only GET and HEAD are supported
+    retryable: false
+    remediation: Re-issue the request as GET or HEAD; the Allow header returns "GET, HEAD".
+    source_operation: every operation in openapi/btc-war-live-market-data-api-market-data-openapi.yml
+    note: Documented in the OpenAPI on all seven paths; not present in the provider's error catalog.
+fail_closed:
+  behaviour: >-
+    The API fails closed. A single-symbol observation is served only when the complete validated nine-market snapshot is
+    available and fresh; otherwise the request 502s rather than returning a stale or partial value.
+  agent_rule: Abstain rather than estimate, reuse an earlier value, or substitute another venue.
+raw:
+  provider_catalog: errors/btc-war-live-market-data-api-error-catalog.json

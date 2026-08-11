@@ -1,0 +1,32 @@
+generated: '2026-08-11'
+method: searched
+source: https://btcwar.net/api/openapi.json
+docs: https://btcwar.net/btc-price
+summary:
+  types: [none]
+  api_key_in: []
+  oauth2_flows: []
+  authentication_required: false
+  note: >-
+    The API declares an empty root-level `security: []` and repeats `security: []` on every operation, which is an
+    explicit OpenAPI 3.1 statement that no security scheme applies. No securitySchemes are defined because none exist.
+schemes: []
+public_access:
+  keyless: true
+  account_required: false
+  registration_required: false
+  payment_required: false
+  cors: "access-control-allow-origin: *"
+  evidence:
+    - url: https://btcwar.net/api/market-snapshot/v1.json
+      http_status: 200
+      note: Anonymous GET returned a complete 200 response with no credential of any kind.
+    - url: https://btcwar.net/mcp
+      http_status: 200
+      note: MCP initialize + tools/list answered anonymously; /.well-known/mcp.json declares authentication.required false.
+    - url: https://btcwar.net/llms.txt
+      http_status: 200
+      note: "Publisher statement: API access is USD 0 with no account, no API key, no registration and no payment required."
+gaps:
+  - No OAuth surface exists, so scopes/ is not applicable to this provider.
+  - No per-caller identity means no per-caller rate limit, quota or usage attribution is possible.
