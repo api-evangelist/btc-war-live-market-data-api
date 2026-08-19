@@ -1,0 +1,4020 @@
+{
+  "item": [
+    {
+      "id": "acc9741f-bd42-400c-89ab-c9d856e36337",
+      "name": "Market data",
+      "description": {
+        "content": "Sourced and timestamped Binance Spot observations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2ed17a9-6d6a-4b31-94d6-82c445df7b9a",
+          "name": "Get the current nine-market snapshot",
+          "request": {
+            "name": "Get the current nine-market snapshot",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT, TRXUSDT, DOGEUSDT, ZECUSDT and ADAUSDT rolling 24-hour ticker observations. Decimal values are strings to preserve source precision. generatedAt is BTC War response-generation time; sourceObservedAt is the Binance closeTime for each market. Responses are cached for at most 30 seconds and fail closed if any required market is missing, invalid or stale.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-snapshot",
+                "v1.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e85a238c-0a7c-46c0-b68b-297840ca4fab",
+              "name": "A complete, fresh, sourced nine-market snapshot.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Browser cache lifetime.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact response body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "SHA-256 validator for this exact snapshot.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP-date form of generatedAt for this exact snapshot.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Canonical and RFC 8574 cite-as page, JSON-LD context, alternate JSON-LD representation, validation schema, API catalog, service description and upstream methodology links.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Current live nine-market response\",\n  \"description\": \"Fetch this URI for current values. Prices change continuously; cite source.venue, sourceObservedAt and generatedAt from the retrieved response rather than treating documentation values as a quote.\",\n  \"externalValue\": \"https://btcwar.net/api/market-snapshot/v1.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d39f198d-9783-4607-a026-73c53bd7f094",
+              "name": "The current snapshot matches If-None-Match or has not changed since If-Modified-Since.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94064dab-6f5b-4ba1-87e0-6ccd23bea1c4",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27d364fb-24d3-4867-94a4-0ff5023f65b3",
+              "name": "A complete and trustworthy live snapshot is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Live market snapshot unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34f267b4-9761-4caa-8929-d9d649b85be9",
+          "name": "Inspect live snapshot metadata",
+          "request": {
+            "name": "Inspect live snapshot metadata",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-snapshot",
+                "v1.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "271b7f36-020a-43a2-a80d-dc6062183742",
+              "name": "Snapshot metadata is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87986f26-fe0e-463a-8b10-8668aea7966f",
+              "name": "The current snapshot matches If-None-Match or has not changed since If-Modified-Since.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6cc06ea3-3fb4-4144-82af-1ca573548717",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eaa09984-a576-400f-9cd2-5e299387ad60",
+              "name": "A complete and trustworthy live snapshot is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7734393d-e155-43ba-89e3-7c206b93ea11",
+          "name": "Get typed live price observations as JSON-LD",
+          "request": {
+            "name": "Get typed live price observations as JSON-LD",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the same complete nine-market Binance Spot snapshot as an explicit Schema.org DataFeed. Each DataFeedItem contains an Observation whose observationAbout is an ExchangeRateSpecification with a UnitPriceSpecification. Decimal prices are strings that preserve Binance source precision; currency is the base asset and priceCurrency is USDT. dateModified is BTC War generation time; observationDate is Binance closeTime. The response fails closed if any required market is missing, invalid or stale.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-snapshot",
+                "v1.jsonld"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/ld+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0610abb3-ecd4-4071-aa6f-0de50d10bd21",
+              "name": "A complete, fresh and explicitly typed nine-market JSON-LD feed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Browser cache lifetime.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact JSON-LD response body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "SHA-256 validator for this exact JSON-LD representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP-date form of the shared generatedAt value.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Canonical and RFC 8574 cite-as page, alternate ordinary JSON representation, validation schema, API catalog, service description and upstream methodology links.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/ld+json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Current live typed price feed\",\n  \"description\": \"Fetch this URI for current values. Prices change continuously; cite the market identifier, observationDate and dateModified from the retrieved feed.\",\n  \"externalValue\": \"https://btcwar.net/api/market-snapshot/v1.jsonld\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b928dd6-ed67-4a1f-a743-a4aa3f9af779",
+              "name": "The current JSON-LD representation matches the supplied validator.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ce1b4daa-e313-4419-a2e4-03e634dbd5ce",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f70c0745-0057-48b6-b287-68486f38e420",
+              "name": "A complete and trustworthy live JSON-LD feed is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Live market JSON-LD feed unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aeb62f1b-92ce-492e-898a-2988d11b008e",
+          "name": "Inspect live JSON-LD feed metadata",
+          "request": {
+            "name": "Inspect live JSON-LD feed metadata",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-snapshot",
+                "v1.jsonld"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7e745f0-ec50-4d42-b444-d19cd83ef89f",
+              "name": "JSON-LD feed metadata is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5490957b-57a9-4523-8183-24b0ab317cbf",
+              "name": "The current JSON-LD representation matches the supplied validator.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "52039dc5-9e3d-4543-92f7-9dd193c7f01e",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "779cb534-30ee-494e-b8fb-c6ea00aec25e",
+              "name": "A complete and trustworthy live JSON-LD feed is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce35e5db-aae8-4cef-9896-5c8199394eef",
+          "name": "Get one directly citable live market observation",
+          "request": {
+            "name": "Get one directly citable live market observation",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Selects one supported symbol from BTC War's complete, validated nine-market Binance Spot snapshot and returns its exact decimal-string values with shared source, provenance, freshness and generation timestamps. The endpoint fails closed when the complete source snapshot is unavailable.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-observation",
+                "v1",
+                "{{symbol}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fffd2fd-5e40-464a-88b0-493580ce699a",
+              "name": "One fresh, sourced Binance Spot market observation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Current BTCUSDT observation\",\n  \"description\": \"Fetch this URI for the current venue-specific value and cite its source, sourceObservedAt and generatedAt fields.\",\n  \"externalValue\": \"https://btcwar.net/api/market-observation/v1/BTCUSDT.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7157ff28-c947-4b00-afa1-3e54be75e36f",
+              "name": "The current observation matches If-None-Match or has not changed since If-Modified-Since.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8bd9f344-80e4-4aea-9486-a77a83ee001d",
+              "name": "The requested market symbol is not supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error\": {},\n  \"supportedSymbols\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccccdf09-4e9e-41ca-88a8-4c0bc95d5914",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "84bd43bf-d34a-4592-af91-534e4a7948ec",
+              "name": "A complete and trustworthy source snapshot is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f269fee-2c71-49e6-a785-35dbdffba51c",
+          "name": "Get one live market observation's validators without a body",
+          "request": {
+            "name": "Get one live market observation's validators without a body",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-observation",
+                "v1",
+                "{{symbol}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b35dbdf0-fc15-4847-86c2-f808033a8476",
+              "name": "Observation metadata headers without a body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d3d3fee-4722-4a53-979d-2ccfbf60bba2",
+              "name": "The current observation matches the supplied validator.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc7301a7-692b-4ac2-b6af-288685c62a48",
+              "name": "The requested market symbol is not supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19c5ddf8-ecdb-430f-990b-360b19613254",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d585814f-526a-46e7-9ae0-df9b5bad50dc",
+              "name": "A complete and trustworthy source snapshot is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad453f35-5928-4c49-a221-63b6f12fa11f",
+          "name": "Get one directly citable semantic live market observation",
+          "request": {
+            "name": "Get one directly citable semantic live market observation",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns one supported Binance Spot USDT market as an explicit Schema.org DataFeed containing one typed Observation and ExchangeRateSpecification. Exact decimal values, venue, source timestamps, freshness and rolling 24-hour statistics are derived from the same validated source snapshot as the ordinary JSON representation. The endpoint fails closed when the complete source snapshot is unavailable.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-observation",
+                "v1",
+                "{{symbol}}.jsonld"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/ld+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "361afc14-e3b6-434c-a2d4-8358863fd010",
+              "name": "One fresh, sourced and explicitly typed Binance Spot market observation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/ld+json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Current typed BTCUSDT observation\",\n  \"description\": \"Fetch this URI for the current Schema.org-typed venue-specific observation and cite its identifier, observationDate and dateModified fields.\",\n  \"externalValue\": \"https://btcwar.net/api/market-observation/v1/BTCUSDT.jsonld\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbdf8163-d512-469e-9918-b20f71a57831",
+              "name": "The current semantic observation matches If-None-Match or has not changed since If-Modified-Since.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7f81cd83-138b-4db9-9151-bc92b2b2c9e1",
+              "name": "The requested market symbol is not supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "56d464d7-112f-4103-af52-453b35971a31",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "29832d00-27cb-4e98-a82b-05fd539c70a6",
+              "name": "A complete and trustworthy semantic source observation is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d05ac30c-0459-43e1-a60a-ebd8159f2e45",
+          "name": "Get one semantic live market observation's validators without a body",
+          "request": {
+            "name": "Get one semantic live market observation's validators without a body",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-observation",
+                "v1",
+                "{{symbol}}.jsonld"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29010215-8866-4f97-a16f-ef953a5e478c",
+              "name": "Semantic observation metadata headers without a body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "81560d2f-61a5-479c-a5f4-6647d8029bc6",
+              "name": "The current semantic observation matches the supplied validator.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9d1c592-6424-43c1-a975-680b73b84c7c",
+              "name": "The requested market symbol is not supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "72ab111a-8c00-408d-8387-fde5c3e40252",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8cf26b49-67bd-422b-9a74-d20e23860842",
+              "name": "A complete and trustworthy semantic source observation is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1",
+                    "{{symbol}}.jsonld"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca182f70-d50c-467e-9103-d8dfb44ea0ef",
+          "name": "Get the single-market observation JSON Schema",
+          "request": {
+            "name": "Get the single-market observation JSON Schema",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the canonical JSON Schema Draft 2020-12 contract used to validate every symbol-specific live observation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-observation",
+                "v1.schema.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/schema+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "045b5153-1327-4d91-9641-bcdf96927af7",
+              "name": "The canonical single-market observation validation contract.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/schema+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/schema+json"
+                }
+              ],
+              "body": "{\n  \"externalValue\": \"https://btcwar.net/api/market-observation/v1.schema.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7c895af-8f83-40cc-8adf-fcb92c864c59",
+              "name": "The schema matches the supplied validator.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1468dc1c-87f3-4b43-9f17-933fd5e84403",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "95e12c26-57e7-4dea-8498-d7087433f564",
+              "name": "The static schema asset is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8a3ba4b-36e1-4318-ab27-ea2c640017fa",
+          "name": "Get the single-market observation schema validators without a body",
+          "request": {
+            "name": "Get the single-market observation schema validators without a body",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-observation",
+                "v1.schema.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44ebd759-185e-47d3-9946-a4e9d65e3def",
+              "name": "Schema metadata headers without a body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2e21bb9f-f842-4419-bb0d-1adcf7e5586e",
+              "name": "The schema matches the supplied validator.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "749c2292-3784-4da4-ae9f-a7875fbdc235",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "30e9bc7a-47ad-49a1-814e-dd6082f4fbe0",
+              "name": "The static schema asset is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-observation",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ce3fb82-14b7-4bd2-ab50-8c8724838e1c",
+          "name": "Get the JSON Schema validation contract",
+          "request": {
+            "name": "Get the JSON Schema validation contract",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the canonical JSON Schema Draft 2020-12 contract used to validate the live snapshot.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-snapshot",
+                "v1.schema.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/schema+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5420fc05-98a3-495e-9c8d-c6fd3f5dcb0c",
+              "name": "The canonical validation contract.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/schema+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/schema+json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Current canonical validation contract\",\n  \"description\": \"Fetch this URI to validate ordinary JSON snapshot responses and inspect field-level provenance, units and constraints.\",\n  \"externalValue\": \"https://btcwar.net/api/market-snapshot/v1.schema.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b7b5c0f-22cf-4336-af17-863e2a0ae16a",
+              "name": "The validation contract matches If-None-Match or has not changed since If-Modified-Since.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44e08aa0-fc26-4ba5-adf1-7e9765a5a71e",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "201de986-bf95-4686-893a-678c675f39e5",
+              "name": "The validation contract asset is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "011b0750-2900-4177-a356-c172f88fb5b0",
+          "name": "Inspect validation contract metadata",
+          "request": {
+            "name": "Inspect validation contract metadata",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the same validation-contract status and response headers as GET without a response body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "market-snapshot",
+                "v1.schema.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2bc6721-bd66-435d-9254-a73ad1c461ec",
+              "name": "Validation contract metadata is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef74f7c3-a9fb-4187-b489-90cdd8907652",
+              "name": "The validation contract matches If-None-Match or has not changed since If-Modified-Since.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "767e4d6d-a7ac-4475-ac0e-fbe2920a13c5",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05d88e5d-85f7-4599-bf7e-1929f149744b",
+              "name": "The validation contract asset is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market-snapshot",
+                    "v1.schema.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dba3f0e-1425-4eb6-8394-69f88aeab9aa",
+          "name": "Get live market-data availability and freshness",
+          "request": {
+            "name": "Get live market-data availability and freshness",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns a machine-readable best-effort availability and freshness signal derived from the same validated nine-market Binance Spot snapshot used by the price endpoints. This is an operational signal, not a contractual uptime guarantee or SLA.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "status",
+                "v1.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b561edd-904c-4af1-b883-4a4b7cc7a06c",
+              "name": "The live market-data service and all nine required markets are currently available and fresh.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "status",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Current live service status\",\n  \"description\": \"Fetch this URI for current service availability and source-freshness evidence.\",\n  \"externalValue\": \"https://btcwar.net/api/status/v1.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6a80864-07e7-40d5-81e8-a2e47598a8e1",
+              "name": "The current status matches If-None-Match or has not changed since If-Modified-Since.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "status",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89837561-5434-4312-b267-4ca3ceb9ad1c",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "status",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4b9aedba-0624-4603-aad0-918b600af129",
+              "name": "A complete and trustworthy live market snapshot is unavailable, so the service cannot report an operational state.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "status",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemaVersion\": \"string\",\n  \"id\": false,\n  \"checkedAt\": 4068,\n  \"service\": {\n    \"status\": {}\n  },\n  \"source\": \"string\",\n  \"data\": false,\n  \"endpoints\": 3928,\n  \"limitations\": 2036.218639191788\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8b73b5c-b892-4a4b-b0a4-31c54fd58b64",
+          "name": "Inspect live market-data status metadata",
+          "request": {
+            "name": "Inspect live market-data status metadata",
+            "description": {
+              "content": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "status",
+                "v1.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Return 304 when this ETag matches the current representation.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                "key": "If-Modified-Since",
+                "value": "<http-date>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f198ba0-a6a0-40ba-9003-07726f1ef54a",
+              "name": "Current status metadata is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "status",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Caching policy for the current representation.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "RFC 9530 SHA-256 digest of the exact representation body.",
+                  "key": "Content-Digest",
+                  "value": "sha-256=:pDDgyO0r==:"
+                },
+                {
+                  "disabled": false,
+                  "description": "Validator for the current representation.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "HTTP date when the current representation was generated or last changed.",
+                  "key": "Last-Modified",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51a8bf43-25d5-4652-8354-9672685f750d",
+              "name": "The current status matches If-None-Match or has not changed since If-Modified-Since.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "status",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "af86cc8e-4fcb-424a-8dc9-47a2c0044d86",
+              "name": "Only GET and HEAD are supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "status",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Methods supported by this read-only resource.",
+                  "key": "Allow",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0882623-8832-4fdd-9cc1-0654c1e09d7d",
+              "name": "A complete and trustworthy live market snapshot is unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "status",
+                    "v1.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when this ETag matches the current representation.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return 304 when the current representation has not changed since this HTTP date. If-None-Match takes precedence when both validators are sent.",
+                    "key": "If-Modified-Since",
+                    "value": "<http-date>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://btcwar.net",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Supported Binance Spot USDT market symbol.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "symbol"
+    }
+  ],
+  "info": {
+    "_postman_id": "307bcc35-aace-4f6a-aeed-6258b6c766ac",
+    "name": "BTC War Live Market Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Read-only, machine-verifiable snapshots of nine Binance Spot markets quoted in USDT. BTC War exposes venue-specific observations with source timestamps, provenance, freshness and limitations; it does not provide consolidated global prices, predictions, trading signals or financial advice. This bundled representation contains no remote JSON Schema references for importers that cannot dereference external URLs.\n\nContact Support:\n Name: BTC War",
+      "type": "text/plain"
+    }
+  }
+}

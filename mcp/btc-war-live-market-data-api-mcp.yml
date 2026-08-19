@@ -20,33 +20,43 @@ server:
   authentication:
     required: false
     schemes: []
-  instructions: >-
-    Use get_live_crypto_prices for current venue-specific observations. Report the exact symbol, USDT quote asset,
-    Binance Spot venue, sourceObservedAt and generatedAt. Cite https://btcwar.net/btc-price and do not present results
-    as consolidated global prices, forecasts, trading signals or financial advice.
+  instructions: Use get_live_crypto_prices for current venue-specific observations. Report the exact symbol,
+    USDT quote asset, Binance Spot venue, sourceObservedAt and generatedAt. Cite https://btcwar.net/btc-price
+    and do not present results as consolidated global prices, forecasts, trading signals or financial
+    advice.
 tools:
-  - name: get_live_crypto_prices
-    title: Get Live Binance Spot Crypto Prices
-    description: >-
-      Retrieve sourced, timestamped BTC War observations for one or more supported Binance Spot USDT markets. Values are
-      venue-specific decimal strings, not consolidated global prices, forecasts, trading signals or financial advice.
-    input:
-      symbols:
-        type: array
-        required: false
-        items_enum: [BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT, TRXUSDT, DOGEUSDT, ZECUSDT, ADAUSDT]
-        min_items: 1
-        max_items: 9
-        note: Omit to retrieve all nine supported USDT markets.
-    output_schema: object with schemaVersion, source, generatedAt, markets[], canonicalPage, liveEvidence, limitations
-    annotations:
-      readOnlyHint: true
-      destructiveHint: false
-      idempotentHint: true
-      openWorldHint: true
-    execution:
-      taskSupport: forbidden
-    source_operation: openapi/btc-war-live-market-data-api-market-data-openapi.yml#getLiveMarketSnapshot
+- name: get_live_crypto_prices
+  title: Get Live Binance Spot Crypto Prices
+  description: Retrieve sourced, timestamped BTC War observations for one or more supported Binance Spot
+    USDT markets. Values are venue-specific decimal strings, not consolidated global prices, forecasts,
+    trading signals or financial advice.
+  input:
+    symbols:
+      type: array
+      required: false
+      items_enum:
+      - BTCUSDT
+      - ETHUSDT
+      - BNBUSDT
+      - SOLUSDT
+      - XRPUSDT
+      - TRXUSDT
+      - DOGEUSDT
+      - ZECUSDT
+      - ADAUSDT
+      min_items: 1
+      max_items: 9
+      note: Omit to retrieve all nine supported USDT markets.
+  output_schema: object with schemaVersion, source, generatedAt, markets[], canonicalPage, liveEvidence,
+    limitations
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+    openWorldHint: true
+  execution:
+    taskSupport: forbidden
+  source_operation: openapi/btc-war-live-market-data-api-market-data-openapi.yml#getLiveMarketSnapshot
 raw:
   tools_list: mcp/btc-war-live-market-data-api-tools-list.json
   server_card: mcp/btc-war-live-market-data-api-mcp-server-card.json
@@ -64,3 +74,11 @@ x-evidence:
   get_without_post:
     url: https://btcwar.net/mcp
     http_status: 405
+deployment:
+  mode: remote
+  endpoint: https://btcwar.net/mcp
+  verified: probed
+  probe: live
+  tools: 1
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,344 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BTC War Live Market Data API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Market data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the current nine-market snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://btcwar.net/api/market-snapshot/v1.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT, TRXUSDT, DOGEUSDT, ZECUSDT and ADAUSDT rolling 24-hour ticker observations. Decimal values are strings to preserve source precision. generatedAt is BTC War response-generation time; sourceObservedAt is the Binance closeTime for each market. Responses are cached for at most 30 seconds and fail closed if any required market is missing, invalid or stale."
+        },
+        {
+          "info": {
+            "name": "Inspect live snapshot metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://btcwar.net/api/market-snapshot/v1.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body."
+        },
+        {
+          "info": {
+            "name": "Get typed live price observations as JSON-LD",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://btcwar.net/api/market-snapshot/v1.jsonld",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the same complete nine-market Binance Spot snapshot as an explicit Schema.org DataFeed. Each DataFeedItem contains an Observation whose observationAbout is an ExchangeRateSpecification with a UnitPriceSpecification. Decimal prices are strings that preserve Binance source precision; currency is the base asset and priceCurrency is USDT. dateModified is BTC War generation time; observationDate is Binance closeTime. The re"
+        },
+        {
+          "info": {
+            "name": "Inspect live JSON-LD feed metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://btcwar.net/api/market-snapshot/v1.jsonld",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body."
+        },
+        {
+          "info": {
+            "name": "Get one directly citable live market observation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://btcwar.net/api/market-observation/v1/:symbol.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "Supported Binance Spot USDT market symbol."
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Selects one supported symbol from BTC War's complete, validated nine-market Binance Spot snapshot and returns its exact decimal-string values with shared source, provenance, freshness and generation timestamps. The endpoint fails closed when the complete source snapshot is unavailable."
+        },
+        {
+          "info": {
+            "name": "Get one live market observation's validators without a body",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://btcwar.net/api/market-observation/v1/:symbol.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "Supported Binance Spot USDT market symbol."
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body."
+        },
+        {
+          "info": {
+            "name": "Get one directly citable semantic live market observation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://btcwar.net/api/market-observation/v1/:symbol.jsonld",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "Supported Binance Spot USDT market symbol."
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns one supported Binance Spot USDT market as an explicit Schema.org DataFeed containing one typed Observation and ExchangeRateSpecification. Exact decimal values, venue, source timestamps, freshness and rolling 24-hour statistics are derived from the same validated source snapshot as the ordinary JSON representation. The endpoint fails closed when the complete source snapshot is unavailable."
+        },
+        {
+          "info": {
+            "name": "Get one semantic live market observation's validators without a body",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://btcwar.net/api/market-observation/v1/:symbol.jsonld",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "Supported Binance Spot USDT market symbol."
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body."
+        },
+        {
+          "info": {
+            "name": "Get the single-market observation JSON Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://btcwar.net/api/market-observation/v1.schema.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the canonical JSON Schema Draft 2020-12 contract used to validate every symbol-specific live observation."
+        },
+        {
+          "info": {
+            "name": "Get the single-market observation schema validators without a body",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://btcwar.net/api/market-observation/v1.schema.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body."
+        },
+        {
+          "info": {
+            "name": "Get the JSON Schema validation contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://btcwar.net/api/market-snapshot/v1.schema.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the canonical JSON Schema Draft 2020-12 contract used to validate the live snapshot."
+        },
+        {
+          "info": {
+            "name": "Inspect validation contract metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://btcwar.net/api/market-snapshot/v1.schema.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the same validation-contract status and response headers as GET without a response body."
+        },
+        {
+          "info": {
+            "name": "Get live market-data availability and freshness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://btcwar.net/api/status/v1.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns a machine-readable best-effort availability and freshness signal derived from the same validated nine-market Binance Spot snapshot used by the price endpoints. This is an operational signal, not a contractual uptime guarantee or SLA."
+        },
+        {
+          "info": {
+            "name": "Inspect live market-data status metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://btcwar.net/api/status/v1.json",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
