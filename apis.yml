@@ -52,76 +52,40 @@ tags_raw:
   - json-schema
   - agent-skill
 apis:
-  - name: BTC War Live Market Data API
-    description: >-
-      Read-only REST/HTTP JSON and JSON-LD API for live Binance Spot market snapshots and single-market observations
-      across nine USDT pairs. Keyless, cached to at most 30 seconds, fail-closed on stale data. Includes OpenAPI 3.1
-      contract, Arazzo workflow, JSON Schemas, a hosted MCP server, and llms.txt.
-    humanURL: https://btcwar.net/btc-price
-    baseURL: https://btcwar.net
-    tags:
-      - Finance
-      - Cryptocurrency
-      - Market Data
-      - Bitcoin
-      - crypto-price
-      - binance-spot
-      - Orderflow
-      - market-depth
-      - JSON-LD
-      - Schema.org
-      - OpenAPI
-      - MCP
-      - Read Only
-      - No Authentication
-    tags_raw:
-      - finance
-      - cryptocurrency
-      - market-data
-      - bitcoin
-      - crypto-price
-      - binance-spot
-      - order-flow
-      - market-depth
-      - json-ld
-      - schema.org
-      - openapi
-      - mcp
-      - read-only
-      - no-authentication
-    properties:
-      - type: OpenAPI
-        url: openapi/btc-war-live-market-data-api-market-data-openapi.yml
-      - type: OpenAPI
-        url: https://btcwar.net/api/openapi.json
-      - type: JSONSchema
-        url: json-schema/btc-war-live-market-data-api-market-snapshot-v1.schema.json
-      - type: JSONSchema
-        url: json-schema/btc-war-live-market-data-api-market-observation-v1.schema.json
-      - type: JSONLD
-        url: json-ld/btc-war-live-market-data-api-dcat.jsonld
-      - type: JSONLD
-        url: json-ld/btc-war-live-market-data-api-market-snapshot-v1.context.jsonld
-      - type: Arazzo
-        url: arazzo/btc-war-live-market-data-api-arazzo.json
-      - type: Overlay
-        url: overlays/btc-war-live-market-data-api-market-data-overlay.yaml
-      - type: Examples
-        url: examples/btc-war-live-market-data-api-examples.json
-      - type: Documentation
-        url: https://btcwar.net/btc-price
-      - type: Documentation
-        url: https://btcwar.net/how-it-works
-      - type: Documentation
-        url: https://btcwar.net/learn/order-flow-vs-order-book
-      - type: LLMSTxt
-        url: https://btcwar.net/llms.txt
-      - type: LLMSTxt
-        url: https://btcwar.net/llms-full.txt
-      - type: MCPServer
-        url: https://btcwar.net/mcp
-      - type: ToolCrosswalk
-        url: mcp/btc-war-live-market-data-api-tool-crosswalk.yml
+- aid: btc-war-live-market-data-api:btc-war-live-market-data-api-market-data-api
+  name: BTC War Live Market Data API Market data API
+  description: Sourced and timestamped Binance Spot observations.
+  humanURL: https://btcwar.net/btc-price
+  baseURL: https://btcwar.net
+  tags:
+  - Market data
+  properties:
+  - type: OpenAPI
+    url: openapi/btc-war-live-market-data-api-market-data-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/btc-war-live-market-data-api-market-snapshot-v1.schema.json
+  - type: JSONSchema
+    url: json-schema/btc-war-live-market-data-api-market-observation-v1.schema.json
+  - type: JSONLD
+    url: json-ld/btc-war-live-market-data-api-dcat.jsonld
+  - type: JSONLD
+    url: json-ld/btc-war-live-market-data-api-market-snapshot-v1.context.jsonld
+  - type: Arazzo
+    url: arazzo/btc-war-live-market-data-api-arazzo.json
+  - type: Examples
+    url: examples/btc-war-live-market-data-api-examples.json
+  - type: Documentation
+    url: https://btcwar.net/btc-price
+  - type: Documentation
+    url: https://btcwar.net/how-it-works
+  - type: Documentation
+    url: https://btcwar.net/learn/order-flow-vs-order-book
+  - type: LLMSTxt
+    url: https://btcwar.net/llms.txt
+  - type: LLMSTxt
+    url: https://btcwar.net/llms-full.txt
+  - type: ToolCrosswalk
+    url: mcp/btc-war-live-market-data-api-tool-crosswalk.yml
 maintainers:
   - FN: VibeWhip
     url: https://github.com/VibeWhip/btc-war
@@ -132,6 +96,8 @@ generated:
   confidence: 95
   at: '2026-07-18T22:59:27.295Z'
 common:
+- type: MCPServer
+  url: https://btcwar.net/mcp
 - type: OpenAPI
   url: openapi/btc-war-live-market-data-api-market-data-openapi.yml
 - type: Arazzo
