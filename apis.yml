@@ -8,6 +8,19 @@ description: >-
   contracts, a hosted Streamable HTTP MCP server, a published Agent Skill, an agentic-access execution contract, an error
   catalog, an interpretation vocabulary, an RFC 9727 API catalog, a W3C DCAT 3 catalog, llms.txt and RFC 9116
   security.txt.
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 image: https://btcwar.net/seo-scenes/modern.webp
 url: https://raw.githubusercontent.com/api-evangelist/btc-war-live-market-data-api/refs/heads/main/apis.yml
 created: '2026-07-18'
