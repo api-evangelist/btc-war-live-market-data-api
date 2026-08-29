@@ -1,6 +1,6 @@
-generated: '2026-08-11'
-method: searched
-source: https://btcwar.net/api/arazzo.json
+x-generated: '2026-08-11'
+x-method: searched
+x-source: https://btcwar.net/api/arazzo.json
 workflows:
   - file: btc-war-live-market-data-api-arazzo.json
     arazzo: 1.1.0
