@@ -2,14 +2,14 @@
 kin_checks:
   slug: btc-war-live-market-data-api
   schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T140727
+  scored_at: '2026-08-28'
+  run_ts: 2026-08-28T221322
   note: Actionable checks only (missed + partial). earned/na are every other check
     in rubric/scoring-0.15.1.yml; counts below let you verify that.
   counts:
     total: 130
-    earned: 49
-    partial: 7
+    earned: 50
+    partial: 6
     missed: 49
     na: 25
   checks:
@@ -119,7 +119,7 @@ kin_checks:
     status: missed
   - id: examples_present
     status: partial
-    earned: 1.71
+    earned: 2.0
   - id: conformance_declared
     status: partial
     earned: 1.5
@@ -135,10 +135,6 @@ kin_checks:
     status: partial
     earned: 4.0
     detail: 'grade: documented'
-  - id: openapi_examples
-    status: partial
-    earned: 3.5
-    detail: 'grade: partial'
   - id: rate_limit_signal
     status: partial
     earned: 3.5
