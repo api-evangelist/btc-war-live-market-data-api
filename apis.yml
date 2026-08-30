@@ -28,23 +28,23 @@ modified: '2026-08-11'
 specificationVersion: '0.23'
 tags:
   - Finance
-  - Cryptocurrency
+  - cryptocurrency
   - Market Data
-  - Bitcoin
+  - bitcoin
   - crypto-price
   - binance-spot
-  - Orderflow
+  - order-flow
   - market-depth
-  - JSON-LD
-  - Schema.org
+  - json-ld
+  - schema.org
   - OpenAPI
   - MCP
   - Read Only
-  - No Authentication
+  - no-authentication
   - agent-native
-  - Arazzo
-  - JSON-Schema
-  - AgentSkill
+  - arazzo
+  - json-schema
+  - agent-skill
 tags_raw:
   - finance
   - cryptocurrency
@@ -71,6 +71,8 @@ apis:
   humanURL: https://btcwar.net/btc-price
   baseURL: https://btcwar.net
   tags:
+  - Market Data
+  tags_raw:
   - Market data
   properties:
   - type: OpenAPI
