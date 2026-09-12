@@ -126,6 +126,8 @@ generated:
   confidence: 95
   at: '2026-07-18T22:59:27.295Z'
 common:
+- type: Website
+  url: https://www.btcwar.net/
 - type: MCPServer
   url: https://btcwar.net/mcp
 - type: OpenAPI
