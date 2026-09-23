@@ -49,7 +49,7 @@ servers:
   description: Production
 security: []
 tags:
-- name: Market data
+- name: Market Data
   description: Sourced and timestamped Binance Spot observations.
 paths:
   /api/market-snapshot/v1.json:
@@ -59,7 +59,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT, TRXUSDT, DOGEUSDT, ZECUSDT and ADAUSDT rolling 24-hour ticker observations. Decimal values are strings to preserve source precision. generatedAt is BTC War response-generation time; sourceObservedAt is the Binance closeTime for each market. Responses are cached for at most 30 seconds and fail closed if any required market is missing, invalid or stale.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -140,7 +140,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -185,7 +185,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the same complete nine-market Binance Spot snapshot as an explicit Schema.org DataFeed. Each DataFeedItem contains an Observation whose observationAbout is an ExchangeRateSpecification with a UnitPriceSpecification. Decimal prices are strings that preserve Binance source precision; currency is the base asset and priceCurrency is USDT. dateModified is BTC War generation time; observationDate is Binance closeTime. The response fails closed if any required market is missing, invalid or stale.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -454,7 +454,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -499,7 +499,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Selects one supported symbol from BTC War's complete, validated nine-market Binance Spot snapshot and returns its exact decimal-string values with shared source, provenance, freshness and generation timestamps. The endpoint fails closed when the complete source snapshot is unavailable.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - name: symbol
         in: path
@@ -577,7 +577,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - name: symbol
         in: path
@@ -615,7 +615,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns one supported Binance Spot USDT market as an explicit Schema.org DataFeed containing one typed Observation and ExchangeRateSpecification. Exact decimal values, venue, source timestamps, freshness and rolling 24-hour statistics are derived from the same validated source snapshot as the ordinary JSON representation. The endpoint fails closed when the complete source snapshot is unavailable.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - name: symbol
         in: path
@@ -760,7 +760,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - name: symbol
         in: path
@@ -798,7 +798,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the canonical JSON Schema Draft 2020-12 contract used to validate every symbol-specific live observation.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -827,7 +827,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the same status and metadata headers as GET without the response body.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -847,7 +847,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the canonical JSON Schema Draft 2020-12 contract used to validate the live snapshot.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -896,7 +896,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the same validation-contract status and response headers as GET without a response body.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -937,7 +937,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns a machine-readable best-effort availability and freshness signal derived from the same validated nine-market Binance Spot snapshot used by the price endpoints. This is an operational signal, not a contractual uptime guarantee or SLA.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -1012,7 +1012,7 @@ paths:
       description: Public, read-only endpoint; no API key or authentication is required. Returns the same status and response headers as GET without a response body.
       security: []
       tags:
-      - Market data
+      - Market Data
       parameters:
       - $ref: '#/components/parameters/IfNoneMatch'
       - $ref: '#/components/parameters/IfModifiedSince'
@@ -1614,12 +1614,17 @@ components:
       schema:
         type: string
         const: GET, HEAD
+    LastModified:
+      description: HTTP date when the current representation was generated or last changed.
+      schema:
+        type: string
+        format: http-date
     Link:
       description: Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.
       schema:
         type: string
-    CacheControl:
-      description: Caching policy for the current representation.
+    ETag:
+      description: Validator for the current representation.
       schema:
         type: string
     ContentDigest:
@@ -1627,13 +1632,8 @@ components:
       schema:
         type: string
         pattern: ^sha-256=:[A-Za-z0-9+/]+={0,2}:$
-    LastModified:
-      description: HTTP date when the current representation was generated or last changed.
-      schema:
-        type: string
-        format: http-date
-    ETag:
-      description: Validator for the current representation.
+    CacheControl:
+      description: Caching policy for the current representation.
       schema:
         type: string
   parameters:
