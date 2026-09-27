@@ -1040,6 +1040,34 @@ paths:
         '503':
           description: A complete and trustworthy live market snapshot is unavailable.
 components:
+  headers:
+    LastModified:
+      description: HTTP date when the current representation was generated or last changed.
+      schema:
+        type: string
+        format: http-date
+    AllowGetHead:
+      description: Methods supported by this read-only resource.
+      schema:
+        type: string
+        const: GET, HEAD
+    ContentDigest:
+      description: RFC 9530 SHA-256 digest of the exact representation body.
+      schema:
+        type: string
+        pattern: ^sha-256=:[A-Za-z0-9+/]+={0,2}:$
+    Link:
+      description: Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.
+      schema:
+        type: string
+    CacheControl:
+      description: Caching policy for the current representation.
+      schema:
+        type: string
+    ETag:
+      description: Validator for the current representation.
+      schema:
+        type: string
   schemas:
     MarketSnapshot:
       title: BTC War live market snapshot
@@ -1348,111 +1376,6 @@ components:
                 baseAsset:
                   const: ADA
       x-source-schema: https://btcwar.net/api/market-snapshot/v1.schema.json
-    MarketDataStatus:
-      type: object
-      additionalProperties: false
-      required:
-      - schemaVersion
-      - id
-      - checkedAt
-      - service
-      - source
-      - data
-      - endpoints
-      - limitations
-      properties:
-        schemaVersion:
-          const: '1.0'
-          description: Version of this status response contract.
-        id:
-          const: https://btcwar.net/api/status/v1.json
-          format: uri
-          description: Stable identifier for this machine status resource.
-        checkedAt:
-          type: string
-          format: date-time
-          description: UTC time when BTC War generated the validated snapshot behind this status.
-        service:
-          type: object
-          additionalProperties: false
-          required:
-          - name
-          - status
-          - serviceClass
-          properties:
-            name:
-              const: BTC War Live Market Data API
-            status:
-              type: string
-              enum:
-              - operational
-              - degraded
-            serviceClass:
-              const: best-effort-public
-        source:
-          type: object
-          additionalProperties: false
-          required:
-          - name
-          - status
-          properties:
-            name:
-              const: Binance Spot
-            status:
-              const: reachable
-        data:
-          type: object
-          additionalProperties: false
-          required:
-          - status
-          - totalMarkets
-          - freshMarkets
-          - oldestSourceObservedAt
-          - newestSourceObservedAt
-          - maxSourceLagSeconds
-          properties:
-            status:
-              type: string
-              enum:
-              - fresh
-              - degraded
-            totalMarkets:
-              const: 9
-            freshMarkets:
-              type: integer
-              minimum: 0
-              maximum: 9
-            oldestSourceObservedAt:
-              type: string
-              format: date-time
-            newestSourceObservedAt:
-              type: string
-              format: date-time
-            maxSourceLagSeconds:
-              type: integer
-              minimum: 0
-              maximum: 120
-        endpoints:
-          type: object
-          additionalProperties: false
-          required:
-          - snapshot
-          - openapi
-          - apiCatalog
-          properties:
-            snapshot:
-              const: https://btcwar.net/api/market-snapshot/v1.json
-              format: uri
-            openapi:
-              const: https://btcwar.net/api/openapi.json
-              format: uri
-            apiCatalog:
-              const: https://btcwar.net/.well-known/api-catalog
-              format: uri
-        limitations:
-          type: string
-          minLength: 1
-          description: States that the response is a best-effort signal rather than an SLA.
     MarketObservation:
       title: BTC War Live Market Observation
       description: Validation contract for one directly citable, sourced and timestamped Binance Spot USDT observation selected from BTC War's complete nine-market snapshot.
@@ -1608,35 +1531,119 @@ components:
             id:
               const: https://btcwar.net/api/market-observation/v1/ADAUSDT.json
       x-source-schema: https://btcwar.net/api/market-observation/v1.schema.json
-  headers:
-    AllowGetHead:
-      description: Methods supported by this read-only resource.
-      schema:
-        type: string
-        const: GET, HEAD
-    LastModified:
-      description: HTTP date when the current representation was generated or last changed.
-      schema:
-        type: string
-        format: http-date
-    Link:
-      description: Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.
-      schema:
-        type: string
-    ETag:
-      description: Validator for the current representation.
-      schema:
-        type: string
-    ContentDigest:
-      description: RFC 9530 SHA-256 digest of the exact representation body.
-      schema:
-        type: string
-        pattern: ^sha-256=:[A-Za-z0-9+/]+={0,2}:$
-    CacheControl:
-      description: Caching policy for the current representation.
-      schema:
-        type: string
+    MarketDataStatus:
+      type: object
+      additionalProperties: false
+      required:
+      - schemaVersion
+      - id
+      - checkedAt
+      - service
+      - source
+      - data
+      - endpoints
+      - limitations
+      properties:
+        schemaVersion:
+          const: '1.0'
+          description: Version of this status response contract.
+        id:
+          const: https://btcwar.net/api/status/v1.json
+          format: uri
+          description: Stable identifier for this machine status resource.
+        checkedAt:
+          type: string
+          format: date-time
+          description: UTC time when BTC War generated the validated snapshot behind this status.
+        service:
+          type: object
+          additionalProperties: false
+          required:
+          - name
+          - status
+          - serviceClass
+          properties:
+            name:
+              const: BTC War Live Market Data API
+            status:
+              type: string
+              enum:
+              - operational
+              - degraded
+            serviceClass:
+              const: best-effort-public
+        source:
+          type: object
+          additionalProperties: false
+          required:
+          - name
+          - status
+          properties:
+            name:
+              const: Binance Spot
+            status:
+              const: reachable
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - status
+          - totalMarkets
+          - freshMarkets
+          - oldestSourceObservedAt
+          - newestSourceObservedAt
+          - maxSourceLagSeconds
+          properties:
+            status:
+              type: string
+              enum:
+              - fresh
+              - degraded
+            totalMarkets:
+              const: 9
+            freshMarkets:
+              type: integer
+              minimum: 0
+              maximum: 9
+            oldestSourceObservedAt:
+              type: string
+              format: date-time
+            newestSourceObservedAt:
+              type: string
+              format: date-time
+            maxSourceLagSeconds:
+              type: integer
+              minimum: 0
+              maximum: 120
+        endpoints:
+          type: object
+          additionalProperties: false
+          required:
+          - snapshot
+          - openapi
+          - apiCatalog
+          properties:
+            snapshot:
+              const: https://btcwar.net/api/market-snapshot/v1.json
+              format: uri
+            openapi:
+              const: https://btcwar.net/api/openapi.json
+              format: uri
+            apiCatalog:
+              const: https://btcwar.net/.well-known/api-catalog
+              format: uri
+        limitations:
+          type: string
+          minLength: 1
+          description: States that the response is a best-effort signal rather than an SLA.
   parameters:
+    IfNoneMatch:
+      name: If-None-Match
+      in: header
+      required: false
+      description: Return 304 when this ETag matches the current representation.
+      schema:
+        type: string
     IfModifiedSince:
       name: If-Modified-Since
       in: header
@@ -1645,13 +1652,6 @@ components:
       schema:
         type: string
         format: http-date
-    IfNoneMatch:
-      name: If-None-Match
-      in: header
-      required: false
-      description: Return 304 when this ETag matches the current representation.
-      schema:
-        type: string
 externalDocs:
   description: Binance Spot rolling 24-hour ticker source methodology
   url: https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints

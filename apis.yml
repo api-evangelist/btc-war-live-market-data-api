@@ -9,17 +9,20 @@ description: 'Public, keyless, read-only real-time crypto market-data API from b
   catalog, an interpretation vocabulary, an RFC 9727 API catalog, a W3C DCAT 3 catalog, llms.txt and RFC
   9116 security.txt.'
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - vibewhip/btc-war
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: free
@@ -56,9 +59,9 @@ tags:
 - MCP
 - Read Only
 - No Authentication
-- agent-native
+- Agent-Native
 - Arazzo
-- JSON-Schema
+- JSON Schema
 - Agent Skills
 tags_raw:
 - finance
@@ -79,12 +82,12 @@ tags_raw:
 - arazzo
 - json-schema
 - agent-skill
+- JSON-Schema
 apis:
 - aid: btc-war-live-market-data-api:btc-war-live-market-data-api-market-data-api
   name: BTC War Live Market Data API Market data API
   description: Sourced and timestamped Binance Spot observations.
   humanURL: https://btcwar.net/btc-price
-  baseURL: https://btcwar.net
   tags:
   - Market Data
   tags_raw:
