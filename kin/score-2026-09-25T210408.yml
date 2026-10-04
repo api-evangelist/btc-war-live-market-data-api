@@ -1,31 +1,29 @@
-# Kin Score artifact — btc-war-live-market-data-api — 2026-08-24T064859
+# Kin Score artifact — btc-war-live-market-data-api — 2026-09-25T210408
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: btc-war-live-market-data-api
-  schema_version: 0.12.1
-  scored_at: '2026-08-24'
-  run_ts: 2026-08-24T064859
-  composite: 45.6
+  schema_version: 0.23.0
+  scored_at: '2026-09-25'
+  run_ts: 2026-09-25T210408
+  composite: 44.9
   band: developing
   facets:
-    discoverability: 75.9
-    contract_quality: 67.8
-    governance: 31.8
+    discoverability: 90.0
+    contract_quality: 62.7
+    contract_governance: 18.2
     operational_transparency: 44.7
-    developer_ergonomics: 26.2
-    commercial_clarity: 21.1
-    contract_governance: 31.8
+    developer_ergonomics: 35.7
     access_clarity: 21.1
   agent_readiness:
-    score: 74.0
+    score: 54.2
     band: agent-native
     dimensions:
       spec_presence: true
-      agentic_access: true
+      agentic_access: unknown
       reversibility_documented: na
       mcp_server: verified
-      auth_clarity: true
+      auth_clarity: bearer
       idempotency: na
       error_semantics: documented
       openapi_examples: verified
@@ -36,11 +34,15 @@ kin_score:
       consent_identity: true
       agent_card: false
       dry_run_mode: na
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   regulatory:
     applies: true
     regime: Securities & Market Data
     regime_id: securities_market_data
-    score: 48.3
+    score: 26.9
     matched_via: tags
   provenance:
     mcp: first-party
