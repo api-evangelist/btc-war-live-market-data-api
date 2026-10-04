@@ -1040,6 +1040,34 @@ paths:
         '503':
           description: A complete and trustworthy live market snapshot is unavailable.
 components:
+  headers:
+    CacheControl:
+      description: Caching policy for the current representation.
+      schema:
+        type: string
+    ETag:
+      description: Validator for the current representation.
+      schema:
+        type: string
+    Link:
+      description: Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.
+      schema:
+        type: string
+    AllowGetHead:
+      description: Methods supported by this read-only resource.
+      schema:
+        type: string
+        const: GET, HEAD
+    LastModified:
+      description: HTTP date when the current representation was generated or last changed.
+      schema:
+        type: string
+        format: http-date
+    ContentDigest:
+      description: RFC 9530 SHA-256 digest of the exact representation body.
+      schema:
+        type: string
+        pattern: ^sha-256=:[A-Za-z0-9+/]+={0,2}:$
   schemas:
     MarketSnapshot:
       title: BTC War live market snapshot
@@ -1608,35 +1636,14 @@ components:
             id:
               const: https://btcwar.net/api/market-observation/v1/ADAUSDT.json
       x-source-schema: https://btcwar.net/api/market-observation/v1.schema.json
-  headers:
-    Link:
-      description: Typed links to canonical, RFC 8574 cite-as, alternate, validation, catalog, service-description and methodology resources as applicable.
-      schema:
-        type: string
-    ETag:
-      description: Validator for the current representation.
-      schema:
-        type: string
-    ContentDigest:
-      description: RFC 9530 SHA-256 digest of the exact representation body.
-      schema:
-        type: string
-        pattern: ^sha-256=:[A-Za-z0-9+/]+={0,2}:$
-    LastModified:
-      description: HTTP date when the current representation was generated or last changed.
-      schema:
-        type: string
-        format: http-date
-    AllowGetHead:
-      description: Methods supported by this read-only resource.
-      schema:
-        type: string
-        const: GET, HEAD
-    CacheControl:
-      description: Caching policy for the current representation.
-      schema:
-        type: string
   parameters:
+    IfNoneMatch:
+      name: If-None-Match
+      in: header
+      required: false
+      description: Return 304 when this ETag matches the current representation.
+      schema:
+        type: string
     IfModifiedSince:
       name: If-Modified-Since
       in: header
@@ -1645,13 +1652,6 @@ components:
       schema:
         type: string
         format: http-date
-    IfNoneMatch:
-      name: If-None-Match
-      in: header
-      required: false
-      description: Return 304 when this ETag matches the current representation.
-      schema:
-        type: string
 externalDocs:
   description: Binance Spot rolling 24-hour ticker source methodology
   url: https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints
