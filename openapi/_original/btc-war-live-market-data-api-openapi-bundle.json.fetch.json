@@ -1,0 +1,12 @@
+{
+ "url": "https://btcwar.net/api/openapi.json",
+ "requested_url": "https://btcwar.net/api/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 64952,
+ "sha256": "c893fd0a8e7307ae40c19fa77fabad183a575e0722767c5386c27980cddd94d2",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
