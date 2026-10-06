@@ -42,7 +42,7 @@ accessModel:
 image: https://btcwar.net/seo-scenes/modern.webp
 url: https://raw.githubusercontent.com/api-evangelist/btc-war-live-market-data-api/refs/heads/main/apis.yml
 created: '2026-07-18'
-modified: '2026-09-16'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 tags:
 - Finance
@@ -129,6 +129,8 @@ generated:
   confidence: 95
   at: '2026-07-18T22:59:27.295Z'
 common:
+- url: https://btcwar.net/feed.xml
+  type: BlogRSS
 - type: Website
   url: https://www.btcwar.net/
 - type: MCPServer
