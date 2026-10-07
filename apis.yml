@@ -129,6 +129,8 @@ generated:
   confidence: 95
   at: '2026-07-18T22:59:27.295Z'
 common:
+- type: Pricing
+  url: https://btcwar.net/llms.txt
 - url: https://btcwar.net/feed.xml
   type: BlogRSS
 - type: Website
