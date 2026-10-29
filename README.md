@@ -1,4 +1,4 @@
-# btc-war-live-market-data-api
+# BTC War Live Market Data API
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,4 +64,148 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Public, read-only real-time crypto market-data API from btcwar.net, exposing live Binance Spot order-flow snapshots and single-market observations for nine USDT pairs as JSON and Schema.org JSON-LD. Ships a complete agent-native discovery stack: OpenAPI 3.1, Arazzo workflow, hosted MCP server, and l
+Public, keyless, read-only real-time crypto market-data API from btcwar.net, exposing live Binance Spot snapshots and single-market observations for nine USDT pairs as JSON and Schema.org JSON-LD. Every response carries provenance, a source timestamp, a rolling 24-hour window definition and an explicit limitations statement, and the service fails closed rather than serving a stale or partial value. It ships one of the most complete agent-native discovery stacks in the catalog: OpenAPI 3.1 (canonical and self-contained bundle), an Arazzo 1.1 workflow, JSON Schema 2020-12 validation contracts, a hosted Streamable HTTP MCP server, a published Agent Skill, an agentic-access execution contract, an error catalog, an interpretation vocabulary, an RFC 9727 API catalog, a W3C DCAT 3 catalog, llms.txt and RFC 9116 security.txt.
+
+**Areas:** Finance · Cryptocurrency · Market Data · Bitcoin · crypto-price · binance-spot · Orderflow · market-depth · JSON-LD · Schema.org · OpenAPI · MCP
+
+## BTC War Live Market Data API on APIs.io
+
+Everything profiled for BTC War Live Market Data API is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/btc-war-live-market-data-api/](https://apis.io/providers/btc-war-live-market-data-api/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [BTC War Live Market Data API Market data API](https://apis.io/apis/btc-war-live-market-data-api/btc-war-live-market-data-api-market-data-api/) — Sourced and timestamped Binance Spot observations.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [mcp](https://apis.io/servers/btc-war-live-market-data-api/mcp/)
+
+#### JSON Schema (2)
+
+The data models the API reads and writes.
+
+- [BTC War Live Market Observation](https://apis.io/schemas/btc-war-live-market-data-api/btc-war-live-market-data-api-market-observation-v1.schema/)
+- [BTC War live market snapshot](https://apis.io/schemas/btc-war-live-market-data-api/btc-war-live-market-data-api-market-snapshot-v1.schema/)
+
+#### JSON-LD (2)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Btc War Live Market Data Api Dcat Context](https://apis.io/jsonld/btc-war-live-market-data-api/btc-war-live-market-data-api-dcat/)
+- [Btc War Live Market Data Api Market Snapshot V1. Context](https://apis.io/jsonld/btc-war-live-market-data-api/btc-war-live-market-data-api-market-snapshot-v1.context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Btc War Live Market Data Api Vocabulary](https://apis.io/vocabularies/btc-war-live-market-data-api/btc-war-live-market-data-api-vocabulary/)
+
+#### Examples (1)
+
+Example requests and responses.
+
+- [Btc War Live Market Data Api Examples](https://apis.io/examples/btc-war-live-market-data-api/btc-war-live-market-data-api-examples/)
+
+#### Collections (1)
+
+Postman and Open Collection request collections.
+
+- [BTC War Live Market Data API](https://apis.io/collections/btc-war-live-market-data-api/open-btc-war-live-market-data-api-market-data/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Btc War Live Market Data Api Market Data Overlay](https://apis.io/overlays/btc-war-live-market-data-api/btc-war-live-market-data-api-market-data-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Btc War Live Market Data Api Authentication](https://apis.io/security/btc-war-live-market-data-api/btc-war-live-market-data-api-authentication/)
+- [Btc War Live Market Data Api Domain Security](https://apis.io/security/btc-war-live-market-data-api/btc-war-live-market-data-api-domain-security/)
+- [Btc War Live Market Data Api Vulnerability Disclosure](https://apis.io/security/btc-war-live-market-data-api/btc-war-live-market-data-api-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Btc War Live Market Data Api Plans Pricing](https://apis.io/plans/btc-war-live-market-data-api/btc-war-live-market-data-api-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Btc War Live Market Data Api Rate Limits](https://apis.io/rate-limits/btc-war-live-market-data-api/btc-war-live-market-data-api-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.btcwar.net/)
+- [Pricing](https://btcwar.net/llms.txt)
+- [Support](https://github.com/VibeWhip/btc-war/discussions)
+- [Blog](https://medium.com/@binbinwangt)
+- [GitHub](https://github.com/VibeWhip)
+- [Status](https://btcwar.net/api/status/v1.json)
+
+## API Evangelist rating
+
+**Kin Score 45.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 76.7 |
+| Contract quality | 62.7 |
+| Contract governance | 18.2 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 31.6 |
+
+**Agent readiness 55.3** — agent-native
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | unknown |
+| Reversibility Documented | na |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | yes |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 26.9** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/btc-war-live-market-data-api/](https://apis.io/providers/btc-war-live-market-data-api/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for BTC War Live Market Data API: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/btc-war-live-market-data-api/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
