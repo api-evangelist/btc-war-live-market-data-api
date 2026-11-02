@@ -1,0 +1,43 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://btcwar.net/llms.txt
+sources:
+- https://btcwar.net/llms.txt
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T161713
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: free
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+published: true
+note: llms.txt discovery file, not a dedicated pricing page; states API access is USD 0 with no account,
+  API key, registration or payment required. Source code explicitly not open source; public GitHub repo
+  holds documentation only.
+plan_count: 1
+currency: USD
+plans:
+- name: API access
+  price_text: 'API access: USD 0; no account, no API key, no registration and no payment required'
+  price: 0
+  currency: USD
+  period: none
+  included_quota: Live nine-market snapshot, symbol observations, MCP server
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: API access
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods:
+    - none

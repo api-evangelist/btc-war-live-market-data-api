@@ -1,0 +1,210 @@
+name: BTC War Live Market Data API
+description: 'Public, keyless, read-only real-time crypto market-data API from btcwar.net, exposing live
+  Binance Spot snapshots and single-market observations for nine USDT pairs as JSON and Schema.org JSON-LD.
+  Every response carries provenance, a source timestamp, a rolling 24-hour window definition and an explicit
+  limitations statement, and the service fails closed rather than serving a stale or partial value. It
+  ships one of the most complete agent-native discovery stacks in the catalog: OpenAPI 3.1 (canonical
+  and self-contained bundle), an Arazzo 1.1 workflow, JSON Schema 2020-12 validation contracts, a hosted
+  Streamable HTTP MCP server, a published Agent Skill, an agentic-access execution contract, an error
+  catalog, an interpretation vocabulary, an RFC 9727 API catalog, a W3C DCAT 3 catalog, llms.txt and RFC
+  9116 security.txt.'
+deliveryModel:
+  model: saas
+  license_evidence:
+    not_product:
+    - vibewhip/btc-war
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-not-product
+  generated: '2026-09-25'
+  method: derived
+accessModel:
+  pricing: free
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Free · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  - rate-limits
+  - security
+  generated: '2026-09-02'
+  method: derived
+image: https://btcwar.net/seo-scenes/modern.webp
+url: https://raw.githubusercontent.com/api-evangelist/btc-war-live-market-data-api/refs/heads/main/apis.yml
+created: '2026-07-18'
+modified: '2026-10-06'
+specificationVersion: '0.23'
+tags:
+- Finance
+- Cryptocurrency
+- Market Data
+- Bitcoin
+- Crypto Price
+- binance-spot
+- Orderflow
+- market-depth
+- JSON-LD
+- Schema.org
+- OpenAPI
+- MCP
+- Read Only
+- No Authentication
+- Agent-Native
+- Arazzo
+- JSON Schema
+- Agent Skills
+tags_raw:
+- finance
+- cryptocurrency
+- market-data
+- bitcoin
+- crypto-price
+- binance-spot
+- order-flow
+- market-depth
+- json-ld
+- schema.org
+- openapi
+- mcp
+- read-only
+- no-authentication
+- agent-native
+- arazzo
+- json-schema
+- agent-skill
+- JSON-Schema
+apis:
+- aid: btc-war-live-market-data-api:btc-war-live-market-data-api-market-data-api
+  name: BTC War Live Market Data API Market data API
+  description: Sourced and timestamped Binance Spot observations.
+  humanURL: https://btcwar.net/btc-price
+  tags:
+  - Market Data
+  tags_raw:
+  - Market data
+  properties:
+  - type: OpenAPI
+    url: openapi/btc-war-live-market-data-api-market-data-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/btc-war-live-market-data-api-market-snapshot-v1.schema.json
+  - type: JSONSchema
+    url: json-schema/btc-war-live-market-data-api-market-observation-v1.schema.json
+  - type: JSONLD
+    url: json-ld/btc-war-live-market-data-api-dcat.jsonld
+  - type: JSONLD
+    url: json-ld/btc-war-live-market-data-api-market-snapshot-v1.context.jsonld
+  - type: Arazzo
+    url: arazzo/btc-war-live-market-data-api-arazzo.json
+  - type: Examples
+    url: examples/btc-war-live-market-data-api-examples.json
+  - type: Documentation
+    url: https://btcwar.net/btc-price
+  - type: Documentation
+    url: https://btcwar.net/how-it-works
+  - type: Documentation
+    url: https://btcwar.net/learn/order-flow-vs-order-book
+  - type: LLMSTxt
+    url: https://btcwar.net/llms.txt
+  - type: LLMSTxt
+    url: https://btcwar.net/llms-full.txt
+  - type: ToolCrosswalk
+    url: mcp/btc-war-live-market-data-api-tool-crosswalk.yml
+maintainers:
+- FN: VibeWhip
+  url: https://github.com/VibeWhip/btc-war
+  email: binbinwangt@gmail.com
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 95
+  at: '2026-07-18T22:59:27.295Z'
+common:
+- type: Pricing
+  url: https://btcwar.net/llms.txt
+- url: https://btcwar.net/feed.xml
+  type: BlogRSS
+- type: Website
+  url: https://www.btcwar.net/
+- type: MCPServer
+  url: https://btcwar.net/mcp
+- type: OpenAPI
+  url: openapi/_original/btc-war-live-market-data-api-market-data-openapi.yml
+- type: Arazzo
+  url: arazzo/btc-war-live-market-data-api-arazzo.json
+- type: Overlay
+  url: overlays/btc-war-live-market-data-api-market-data-overlay.yaml
+- type: Examples
+  url: examples/btc-war-live-market-data-api-examples.json
+- type: Vocabulary
+  url: vocabulary/btc-war-live-market-data-api-vocabulary.yaml
+- type: DataModel
+  url: data-model/btc-war-live-market-data-api-data-model.yml
+- type: Authentication
+  url: authentication/btc-war-live-market-data-api-authentication.yml
+- type: Conventions
+  url: conventions/btc-war-live-market-data-api-conventions.yml
+- type: Idempotency
+  url: conventions/btc-war-live-market-data-api-conventions.yml
+- type: ErrorCatalog
+  url: errors/btc-war-live-market-data-api-problem-types.yml
+- type: RateLimits
+  url: rate-limits/btc-war-live-market-data-api-rate-limits.yml
+- type: Plans
+  url: plans/btc-war-live-market-data-api-plans-pricing.yml
+- type: Lifecycle
+  url: lifecycle/btc-war-live-market-data-api-lifecycle.yml
+- type: StatusPage
+  url: https://btcwar.net/api/status/v1.json
+- type: ChangeLog
+  url: changelog/btc-war-live-market-data-api-changelog.yml
+- type: Conformance
+  url: conformance/btc-war-live-market-data-api-conformance.yml
+- type: MCPServer
+  url: mcp/btc-war-live-market-data-api-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/btc-war-live-market-data-api-tool-crosswalk.yml
+- type: AgenticAccess
+  url: agentic-access/btc-war-live-market-data-api-agentic-access.yaml
+- type: AgentSkill
+  url: skills/btc-war-live-market-data-api-live-crypto-price.md
+- type: LLMsTxt
+  url: llms/btc-war-live-market-data-api-llms.txt
+- type: WellKnown
+  url: well-known/btc-war-live-market-data-api-well-known.yml
+- type: APICatalog
+  url: https://btcwar.net/.well-known/api-catalog
+- type: SecurityTxt
+  url: well-known/btc-war-live-market-data-api-security.txt
+- type: ContentSignal
+  url: https://btcwar.net/robots.txt
+- type: Security
+  url: security/btc-war-live-market-data-api-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/btc-war-live-market-data-api-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/btc-war-live-market-data-api-domain-security.yml
+- type: Packages
+  url: packages/btc-war-live-market-data-api-packages.yml
+- type: SourceCode
+  url: https://github.com/VibeWhip/btc-war
+- type: GitHubOrganization
+  url: https://github.com/VibeWhip
+- type: Support
+  url: https://github.com/VibeWhip/btc-war/discussions
+- type: Blog
+  url: https://medium.com/@binbinwangt
+x-enrichment:
+  date: '2026-08-11'
+  status: enriched
+  artifacts_added: 37
+  pass: local-v1
