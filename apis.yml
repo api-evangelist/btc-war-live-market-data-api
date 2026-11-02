@@ -30,6 +30,9 @@ accessModel:
   trial: false
   try_now: true
   public: true
+  gated: none
+  gated_source:
+  - onboarding
   label: Free · Open access
   confidence: high
   source:
@@ -37,7 +40,7 @@ accessModel:
   - authentication
   - rate-limits
   - security
-  generated: '2026-09-02'
+  generated: '2026-11-02'
   method: derived
 image: https://btcwar.net/seo-scenes/modern.webp
 url: https://raw.githubusercontent.com/api-evangelist/btc-war-live-market-data-api/refs/heads/main/apis.yml
