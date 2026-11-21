@@ -1,3 +1,4 @@
+aid: btc-war-live-market-data-api
 name: BTC War Live Market Data API
 description: 'Public, keyless, read-only real-time crypto market-data API from btcwar.net, exposing live
   Binance Spot snapshots and single-market observations for nine USDT pairs as JSON and Schema.org JSON-LD.
@@ -40,7 +41,7 @@ accessModel:
   - authentication
   - rate-limits
   - security
-  generated: '2026-11-13'
+  generated: '2026-11-20'
   method: derived
 image: https://btcwar.net/seo-scenes/modern.webp
 url: https://raw.githubusercontent.com/api-evangelist/btc-war-live-market-data-api/refs/heads/main/apis.yml
